@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+var cp = require('child_process');
+if (process.stdin.isTTY) {
+    cp.spawn('pbpaste').stdout.pipe(process.stdout);
+} else {
+    process.stdin.pipe(cp.spawn('pbcopy').stdin);
+}
