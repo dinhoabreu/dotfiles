@@ -52,7 +52,10 @@ source ~/dotfiles/tmux.conf
 
 Link .vim and .vimrc to `$HOME`
 ```bash
-ln -s ~/dotfiles/.vimrc ~/.vimrc
-ln -s ~/dotfiles/.vim ~/.vim
+ln -s ~/dotfiles/vimrc ~/.vimrc
+ln -s ~/dotfiles/vim ~/.vim
+# Install plugin manager
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+# Install plugins
+vim --noplugin -u /Users/edison/.vim/vundles.vim -N "+set hidden" "+syntax on" +BundleClean +BundleInstall +qall
 ```
