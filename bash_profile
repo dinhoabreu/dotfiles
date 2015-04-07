@@ -43,7 +43,7 @@ function gitrm {
     git status | grep 'deleted' | awk '{print $3}' | xargs git rm
 }
 function latest {
-  ls -t $1/* | head -n 1
+    ls -t $1/* | head -n 1
 }
 function toss {
     for filename; do
@@ -55,7 +55,7 @@ function toss {
     done
 }
 function variables() {
-  comm -23 <(declare) <(declare -f) ;
+    comm -23 <(declare) <(declare -f) ;
 }
 
 #The command line prompt.

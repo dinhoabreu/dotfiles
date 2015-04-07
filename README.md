@@ -40,11 +40,16 @@ Edit your `.gitconfig`
 
 ### Tmux - config
 
+Locate `powerline.conf`
+```bash
+python_resolver /powerline/bindings/tmux/powerline.conf
+# Example output: /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
+```
+
 Edit your `.tmux.conf`
 ```bash
-if-shell 'test -z "$POWERLINE_CONFIG_COMMAND"' 'set-environment -g POWERLINE_CONFIG_COMMAND powerline-config'
-run-shell 'eval $POWERLINE_CONFIG_COMMAND tmux setenv'
-run-shell 'eval $POWERLINE_CONFIG_COMMAND tmux source'
+# Use the output of python_resolver here
+source /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
 source ~/dotfiles/tmux.conf
 ```
 
@@ -57,5 +62,5 @@ ln -s ~/dotfiles/vim ~/.vim
 # Install plugin manager
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 # Install plugins
-vim --noplugin -u /Users/edison/.vim/vundles.vim -N "+set hidden" "+syntax on" +BundleClean +BundleInstall +qall
+vim --noplugin -u ~/.vim/vundles.vim -N "+set hidden" "+syntax on" +BundleClean +BundleInstall +qall
 ```
