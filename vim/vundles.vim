@@ -28,8 +28,13 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'mattn/emmet-vim'
 Plugin 'msanders/snipmate.vim'
 Plugin 'ciaranm/detectindent'
+Plugin 'pangloss/vim-javascript'
 
 " Plugins setup
+if executable('tidy5')
+  let g:syntastic_html_tidy_exec = 'tidy5'
+endif
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#left_sep = ' '
