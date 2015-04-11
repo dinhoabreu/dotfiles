@@ -29,8 +29,15 @@ Plugin 'mattn/emmet-vim'
 Plugin 'msanders/snipmate.vim'
 Plugin 'ciaranm/detectindent'
 Plugin 'pangloss/vim-javascript'
+Plugin 'michaeljsmith/vim-indent-object'
 
 " Plugins setup
+" Open a NERDTree automatically when vim starts up if no files were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q |
+
 if executable('tidy5')
   let g:syntastic_html_tidy_exec = 'tidy5'
 endif

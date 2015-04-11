@@ -32,7 +32,7 @@ syntax on
 " That means all \x commands turn into ,x
 " The mapleader has to be set before vundle starts loading all 
 " the plugins.
-let mapleader=","
+" let mapleader=","
 
 " =============== Vundle Initialization ===============
 " This loads all the plugins specified in ~/.vim/vundles.vim
@@ -111,8 +111,8 @@ set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
 
 " ================ Key Map ==========================
-nmap \[ :bp<CR>
-nmap \] :bn<CR>
-nmap \q :bd<CR>
-nmap \= :enew<CR>
-nmap \\ :NERDTree<CR>
+nmap <Leader>[ :bp<CR>
+nmap <Leader>] :bn<CR>
+nmap <Leader>q :bd<CR>
+nmap <Leader>= :enew<CR>
+nmap <Leader><Leader> :NERDTreeToggle<CR>
