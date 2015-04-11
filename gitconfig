@@ -3,7 +3,7 @@
     autocrlf = input
     excludesfile = ~/dotfiles/gitignore
 [merge]
-    tool = vimdiff
+    tool = hvimdiff
 [color]
     status = auto
     branch = auto
