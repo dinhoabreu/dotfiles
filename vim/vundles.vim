@@ -30,6 +30,7 @@ Plugin 'msanders/snipmate.vim'
 Plugin 'ciaranm/detectindent'
 Plugin 'pangloss/vim-javascript'
 Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'altercation/vim-colors-solarized'
 
 " Plugins setup
 " Open a NERDTree automatically when vim starts up if no files were specified
@@ -53,6 +54,12 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:detectindent_preferred_expandtab = 1
 let g:detectindent_preferred_indent = 2
 let g:detectindent_preferred_when_mixed = 1
+
+let g:solarized_termcolors=256
+syntax enable
+set background=light
+colorscheme solarized
+
 autocmd BufRead * :DetectIndent
 
 "Filetype plugin indent on is required by vundle
