@@ -49,8 +49,8 @@ python_resolver /powerline/bindings/tmux/powerline.conf
 Edit your `.tmux.conf`
 ```bash
 # Use the output of python_resolver here
-source /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
-source ~/dotfiles/tmux.conf
+source-file /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
+source-file ~/dotfiles/tmux.conf
 ```
 
 ### Vim - config

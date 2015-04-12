@@ -68,7 +68,7 @@ case "$TERM" in
 esac
 if [ "$color_prompt" = yes ]; then
     # export PS1="\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W \$\[\033[00m\] " #No date
-    export PS1="\[\033[37m\][\$(date +'%Y-%m-%d %H:%M:%S')] \[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W \$\[\033[00m\] "
+    export PS1="\[\033[00m\][\$(date +'%Y-%m-%d %H:%M:%S')] \[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W \$\[\033[00m\] "
 else
     # export PS1='\u@\h:\w\n\$ ' #No date
     export PS1="[\$(date +'%Y-%m-%d %H:%M:%S')] \u@\h:\w\n\$ "

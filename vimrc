@@ -30,9 +30,14 @@ syntax on
 
 " Change leader to a comma because the backslash is too far away
 " That means all \x commands turn into ,x
-" The mapleader has to be set before vundle starts loading all 
+" The mapleader has to be set before vundle starts loading all
 " the plugins.
 " let mapleader=","
+
+" =============== Custom functions ===============
+if filereadable(expand("~/.vim/functions.vim"))
+  source ~/.vim/functions.vim
+endif
 
 " =============== Vundle Initialization ===============
 " This loads all the plugins specified in ~/.vim/vundles.vim
@@ -91,6 +96,7 @@ set wildignore+=*sass-cache*
 set wildignore+=*DS_Store*
 set wildignore+=vendor/rails/**
 set wildignore+=vendor/cache/**
+set wildignore+=*/node_modules/**
 set wildignore+=*.gem
 set wildignore+=log/**
 set wildignore+=tmp/**
@@ -110,9 +116,16 @@ set hlsearch        " Highlight searches by default
 set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
 
+" ================ Scheme ===========================
+
+set background=dark
+colorscheme solarized
+
 " ================ Key Map ==========================
 nmap <Leader>[ :bp<CR>
 nmap <Leader>] :bn<CR>
 nmap <Leader>q :bd<CR>
 nmap <Leader>= :enew<CR>
 nmap <Leader><Leader> :NERDTreeToggle<CR>
+nmap <Leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
+nmap <Leader>= :call Preserve("normal gg=G")<CR>
