@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+SRC=${1-.}
+IFS=$'\n'
+
+if [ ! -d "$SRC" ]; then
+  echo Usage: $0 [dir]
+  exit 1
+fi
+for i in `find $SRC -xdev -type d`; do
+  echo `ls -a $i | wc -l` $i
+done | sort -n | tail -10
