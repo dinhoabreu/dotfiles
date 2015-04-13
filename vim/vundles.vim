@@ -47,6 +47,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 let g:Powerline_symbols = 'fancy'
 
+let g:snipMate = {}
+let g:snipMate.snippet_version = 1
+
 let g:ctrlp_cmd = 'CtrlP'
 
 let g:detectindent_preferred_expandtab = 1
