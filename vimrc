@@ -125,7 +125,7 @@ colorscheme solarized
 nmap <Leader>[ :bp<CR>
 nmap <Leader>] :bn<CR>
 nmap <Leader>q :bd<CR>
-nmap <Leader>= :enew<CR>
+nmap <Leader>n :enew<CR>
 nmap <Leader><Leader> :NERDTreeToggle<CR>
 nmap <Leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap <Leader>= :call Preserve("normal gg=G")<CR>

@@ -35,6 +35,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Yggdroot/indentLine'
+Plugin 'elzr/vim-json'
 
 " Plugins setup
 if executable('tidy5')
@@ -59,6 +60,7 @@ let g:detectindent_preferred_when_mixed = 1
 " let g:solarized_termcolors=256
 
 " let g:indentLine_char = '︙'
+let g:indentLine_noConcealCursor = ''
 
 autocmd BufRead * :DetectIndent
 
