@@ -67,8 +67,13 @@ case "$TERM" in
     screen-256color) color_prompt=yes;;
 esac
 if [ "$color_prompt" = yes ]; then
-    # export PS1="\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W \$\[\033[00m\] " #No date
-    export PS1="\[\033[00m\][\$(date +'%Y-%m-%d %H:%M:%S')] \[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W \$\[\033[00m\] "
+    red="\[\033[0;31m\]"
+    blue="\[\033[0;34m\]"
+    green="\[\033[0;32m\]"
+    gray="\[\033[0;30m\]"
+    white="\[\033[0;00m\]"
+    # export PS1="$red\u$blue@\h$green:\W \$$white " # No date
+    export PS1="$gray[\$(date +'%Y-%m-%d %H:%M:%S')] $red\u$blue@\h$gray:$green\W \$$white "
 else
     # export PS1='\u@\h:\w\n\$ ' #No date
     export PS1="[\$(date +'%Y-%m-%d %H:%M:%S')] \u@\h:\w\n\$ "
