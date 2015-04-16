@@ -58,6 +58,8 @@ let g:detectindent_preferred_indent = 2
 let g:detectindent_preferred_when_mixed = 1
 
 " let g:solarized_termcolors=256
+let g:solarized_contrast = 'normal'
+let g:solarized_visibility = 'low'
 
 " let g:indentLine_char = '︙'
 let g:indentLine_noConcealCursor = ''
