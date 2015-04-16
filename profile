@@ -1,6 +1,7 @@
 #Path setup.
 export PATH=/usr/local/bin:${PATH}
 export PATH=${PATH}:/usr/local/sbin
+export PATH=${HOME}/bin:${PATH}
 export PATH=${HOME}/dotfiles/bin:${PATH}
 if [[ $OSTYPE == *darwin* ]]; then
   export PATH=${HOME}/dotfiles/bin/osx:${PATH}
