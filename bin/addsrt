@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+srt_to_m4v()
+{
+  local srt=$1
+  name=`basename $srt`
+  echo ${name/%srt/m4v}
+}
+
+m4v_has_srt()
+{
+  local srt=$1
+  MP4Box -info $1 | grep 'sbtl:tx3g' >/dev/null
+}
+
+add_srt()
+{
+  local srt=$1
+  local m4v=$2
+  m4v_has_srt $m4v
+  if [ $? -eq 0 ]; then
+    >&2 echo [$m4v] already has .srt
+  else
+    MP4Box -add $srt:lang=pt:layout=0x80x0x-1:group=2:hdlr="sbtl:tx3g" $m4v
+  fi
+}
+
+find_add_srt()
+{
+  local IFS=$'\n'
+  for srt in `find srt -name '*.srt'`; do
+    name=`srt_to_m4v $srt`
+    for m4v in `find . -name $name`; do
+      add_srt $srt $m4v
+    done
+  done
+}
+
+src=${1-.}
+find_add_srt $src # Add subtitle track
