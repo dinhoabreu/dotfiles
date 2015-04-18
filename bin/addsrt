@@ -26,10 +26,11 @@ add_srt()
 
 find_add_srt()
 {
+  local src=$1
   local IFS=$'\n'
-  for srt in `find srt -name '*.srt'`; do
+  for srt in `find $src -name '*.srt'`; do
     name=`srt_to_m4v $srt`
-    for m4v in `find . -name $name`; do
+    for m4v in `find $src -name $name`; do
       add_srt $srt $m4v
     done
   done
