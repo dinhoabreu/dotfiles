@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+m4v_to_srt()
+{
+  local name=`basename $1`
+  echo ${name/%m4v/srt}
+}
+
+get_url()
+{
+  local name=$1
+  subtitler $name --lang pob | grep $name -A 1 | tail -1 | awk '$2~/^http/{print $2}'
+}
+
+srt_exists()
+{
+  local name=$1
+  local src=${2-.}
+  ok=`find $src -name $name`
+  [ "$ok" != "" ]
+}
+
+find_m4v_add()
+{
+  local src=$1
+  for m4v in `find $src -name '*.m4v'`; do
+    name=`m4v_to_srt $m4v`
+    srt_exists $name $src
+    if [ $? -eq 0 ]; then
+      echo [$name] already exists
+    else
+      url=`get_url $name`
+      if [ "$url" == "" ]; then
+        echo [$name] not found
+        continue
+      fi
+      echo [$name] found
+      curl -so ${name}.gz $url >/dev/null
+      [ $? -eq 0 ] || continue
+      gunzip ${name}.gz >/dev/null
+    fi
+  done
+}
+
+src=${1-.}
+find_m4v_add $src
