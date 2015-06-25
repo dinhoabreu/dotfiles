@@ -36,6 +36,7 @@ Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Yggdroot/indentLine'
 Plugin 'elzr/vim-json'
+Plugin 'restore_view.vim'
 
 " Plugins setup
 if executable('tidy5')
