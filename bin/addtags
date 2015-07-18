@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+shopt -s nocasematch # Set ignorecase regexs
+
+function join {
+  local sep="$1"; local cur=""; shift
+  for slice in $*; do
+    echo -n ${cur}${slice}
+    cur=$sep
+  done
+  echo
+}
+
+function get_options {
+  local tags=()
+  local name="$1"
+
+  tags+=(song)
+  local tag_song=$(echo $name | cut -d . -f 1-2)
+
+  tags+=(hdvideo)
+  local tag_hdvideo=$([[ $name =~ hd ]] && echo 1 || echo 0)
+
+  [[ $name =~ s([0-9]{2})e([0-9]{2}) ]]
+
+  tags+=(season)
+  local tag_season=${BASH_REMATCH[1]}
+
+  tags+=(episode)
+  local tag_episode=${BASH_REMATCH[2]}
+
+  tags+=(episodeid)
+  local tag_episodeid=${tag_season}${tag_episode}
+
+  tags+=(show)
+  local tag_show=$(echo $name | cut -d . -f 1)
+
+  for tag in ${tags[*]}; do
+    eval value="\$tag_$tag"
+    [[ "$value" != "" ]] && echo -n " -$tag $value"
+  done
+}
+
+file="$1"
+if [ -f "$file" ]; then
+  options=$(get_options "$file")
+  echo TAGS added: $options
+  mp4tags $(get_options "$file") "$file"
+else
+  echo Usage: $0 ShowName.SXXEYY.HDTV.m4v
+  exit 1
+fi
