@@ -38,6 +38,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'elzr/vim-json'
 Plugin 'restore_view.vim'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'tpope/vim-unimpaired'
 
 " Plugins setup
 if executable('tidy5')
