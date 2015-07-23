@@ -30,13 +30,14 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-Plugin 'ciaranm/detectindent'
+"Plugin 'ciaranm/detectindent'
 Plugin 'pangloss/vim-javascript'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Yggdroot/indentLine'
 Plugin 'elzr/vim-json'
 Plugin 'restore_view.vim'
+Plugin 'editorconfig/editorconfig-vim'
 
 " Plugins setup
 if executable('tidy5')
@@ -71,7 +72,10 @@ let g:solarized_visibility = 'low'
 " let g:indentLine_char = '︙'
 let g:indentLine_noConcealCursor = ''
 
-autocmd BufRead * :DetectIndent
+" Depends plugin 'ciaranm/detectindent'
+" autocmd BufRead * :DetectIndent
+
+autocmd BufRead * :EditorConfigReload
 
 "Filetype plugin indent on is required by vundle
 filetype plugin indent on
