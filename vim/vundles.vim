@@ -77,7 +77,7 @@ let g:indentLine_noConcealCursor = ''
 " Depends plugin 'ciaranm/detectindent'
 " autocmd BufRead * :DetectIndent
 
-autocmd BufRead * :EditorConfigReload
+" autocmd BufRead * :EditorConfigReload
 
 "Filetype plugin indent on is required by vundle
 filetype plugin indent on
