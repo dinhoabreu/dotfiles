@@ -35,6 +35,9 @@ function get_options {
   tags+=(show)
   local tag_show=$(echo $name | cut -d . -f 1)
 
+  tags+=(type)
+  local tag_type=$([[ $tag_episode ]] && echo tvshow)
+
   for tag in ${tags[*]}; do
     eval value="\$tag_$tag"
     [[ "$value" != "" ]] && echo -n " -$tag $value"
