@@ -25,7 +25,7 @@
     enabled = true
 [alias]
     st = status -s
-    lg = log --decorate --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    lg = log --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     mylog = log --pretty=format:'%h %s [%an]' --graph
     grp = grep --break --heading --line-number
