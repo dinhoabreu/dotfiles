@@ -71,11 +71,22 @@ vim --noplugin -u ~/.vim/vundles.vim -N "+set hidden" "+syntax on" +BundleClean 
 
 ## Commands
 
+### getsrt
+
+Search subtitles for MP4/M4V files based on filename.
+
+Requires `subtitler` command line. OSX install:
+
+```bash
+npm install subtitler -g
+```
+
 ### addtags
 
 Add tags onto MP4/M4V files based on filename pattern.
 
 Requires `mp4tags` command line. OSX install:
+
 ```bash
 brew install mp4v2
 ```
