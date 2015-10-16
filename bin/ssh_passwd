@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+ID=dinho.abreu@gmail.com
+case $1 in
+  save)
+    gpg2 -ear "$ID" ~/.ssh/passwd
+    ;;
+  clean)
+    rm -i ~/.ssh/passwd
+    ;;
+  *)
+    gpg2 -ar "$ID" ~/.ssh/passwd.asc
+    ;;
+esac

@@ -3,6 +3,7 @@
 ## Installation
 
 Checkout this repo into `$HOME/dotfiles`
+
 ```bash
 git clone https://github.com/dinhoabreu/dotfiles.git $HOME/dotfiles
 ```
@@ -10,6 +11,7 @@ git clone https://github.com/dinhoabreu/dotfiles.git $HOME/dotfiles
 ### Shell - setup
 
 Edit your `.profile`
+
 ```bash
 if [ -f ~/dotfiles/profile ]; then
   . ~/dotfiles/profile
@@ -17,6 +19,7 @@ fi
 ```
 
 Edit your `.bashrc`
+
 ```bash
 if [ -f ~/dotfiles/bashrc ]; then
   . ~/dotfiles/bashrc
@@ -24,6 +27,7 @@ fi
 ```
 
 Edit your `.bash_profile`
+
 ```bash
 if [ -f ~/dotfiles/bash_profile ]; then
   . ~/dotfiles/bash_profile
@@ -33,6 +37,7 @@ fi
 ### Git - config
 
 Edit your `.gitconfig`
+
 ```bash
 [include]
   path = ~/dotfiles/gitconfig
@@ -41,12 +46,14 @@ Edit your `.gitconfig`
 ### Tmux - config
 
 Locate `powerline.conf`
+
 ```bash
 python_resolver /powerline/bindings/tmux/powerline.conf
 # Example output: /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
 ```
 
 Edit your `.tmux.conf`
+
 ```bash
 # Use the output of python_resolver here
 source-file /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
@@ -56,6 +63,7 @@ source-file ~/dotfiles/tmux.conf
 ### Vim - config
 
 Link .vim and .vimrc to `$HOME`
+
 ```bash
 ln -s ~/dotfiles/vimrc ~/.vimrc
 ln -s ~/dotfiles/vim ~/.vim
@@ -63,6 +71,15 @@ ln -s ~/dotfiles/vim ~/.vim
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 # Install plugins
 vim --noplugin -u ~/.vim/vundles.vim -N "+set hidden" "+syntax on" +BundleClean +BundleInstall +qall
+```
+
+### SSH - config
+
+Link `ssh/config` and `ssh/passwd.asc` to `$HOME/.ssh/`
+
+```bash
+ln -s ~/dotfiles/ssh/config ~/.ssh/config
+ln -s ~/dotfiles/ssh/passwd.asc ~/.ssh/passwd.asc
 ```
 
 ### Terminal - Theme solarized
@@ -89,4 +106,13 @@ Requires `mp4tags` command line. OSX install:
 
 ```bash
 brew install mp4v2
+```
+
+### ssh_passwd
+
+Encrypt/Decrypt password file using `gpg2`.
+
+```bash
+ssh_passwd # Decrypt ~/.ssh/passwd.asc
+ssh_passwd save # Encrypt ~/.ssh/passwd
 ```
