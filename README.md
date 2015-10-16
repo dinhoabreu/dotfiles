@@ -80,6 +80,7 @@ Link `ssh/config` and `ssh/passwd.asc` to `$HOME/.ssh/`
 ```bash
 ln -s ~/dotfiles/ssh/config ~/.ssh/config
 ln -s ~/dotfiles/ssh/passwd.asc ~/.ssh/passwd.asc
+chmod go-rwx ~/.ssh/{config,passwd.asc}
 ```
 
 ### Terminal - Theme solarized
