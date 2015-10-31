@@ -93,7 +93,7 @@ chmod go-rwx ~/.ssh/{config,passwd.asc}
 
 Search subtitles for MP4/M4V files based on filename.
 
-Requires `subtitler` command line. OSX install:
+Requires `subtitler` command line and `PHP`. OSX install:
 
 ```bash
 npm install subtitler -g
