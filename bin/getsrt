@@ -13,10 +13,20 @@ similar_text()
 get_url()
 {
   local name=$1
-  values=(`subtitler $name --lang pob | grep Subtitle -A 1 | awk 'NR < 3 { print $2 }'`)
-  local srt=${values[0]}
-  local url=${values[1]}
-  local similarity=`similar_text "$name" "$srt"`
+  local srt=""
+  local url=""
+  local similarity=0
+  local values=(`subtitler $name --lang pob | grep Subtitle -A 1 | awk '{ print $2 }'`)
+  for ((i=0; i < ${#values[@]}; i+=2)) {
+    local _srt="${values[i]}"
+    local _url="${values[i+1]}"
+    local _similarity=`similar_text "$name" "$_srt"`
+    if ((_similarity > similarity)); then
+      srt="$_srt"
+      url="$_url"
+      similarity=$_similarity
+    fi
+  }
   ((similarity > 85)) && echo $url
 }
 
