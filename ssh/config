@@ -29,6 +29,11 @@ User root
 HostName 172.25.80.18
 IdentityFile %d/.ssh/id_amsxf01
 
+Host rn.azul 10.0.254.249
+User root
+HostName 10.0.254.249
+IdentityFile %d/.ssh/id_amsxf01
+
 Host prod.cloop.azul
 User amix
 HostName 10.0.5.110
@@ -131,10 +136,6 @@ Host 10.4.255.7 backup.portal.gol
 User bases
 HostName 10.4.255.7
 
-Host rn.gol 10.0.254.249
-User amix
-HostName 10.0.254.249
-
 Host fw.stam 10.0.0.3
 User root
 HostName 10.0.0.3
@@ -161,4 +162,9 @@ IdentityFile %d/.ssh/id_amsxf01
 Host prd.ged.cba 10.56.3.20
 User root
 HostName 10.56.3.20
+IdentityFile %d/.ssh/id_amsxf01
+
+Host somos.cloop
+User root
+HostName 10.196.7.53
 IdentityFile %d/.ssh/id_amsxf01
