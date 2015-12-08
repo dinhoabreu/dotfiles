@@ -34,6 +34,12 @@ User root
 HostName 10.0.254.249
 IdentityFile %d/.ssh/id_amsxf01
 
+Host caxias.bohler
+User root
+HostName 172.25.80.18
+IdentityFile ~/.ssh/id_amsxf01
+LocalForward 9433 172.16.27.101:1433
+
 Host prod.cloop.azul
 User amix
 HostName 10.0.5.110
