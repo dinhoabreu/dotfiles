@@ -83,6 +83,17 @@ ln -s ~/dotfiles/ssh/passwd.asc ~/.ssh/passwd.asc
 chmod go-rwx ~/.ssh/{config,passwd.asc}
 ```
 
+Some cases like in my host `amsxd01` I have a git hook `.git/hooks/post-checkout`
+
+```bash
+#!/usr/bin/env bash
+
+sed '/ProxyCommand.*amsxd01/d' ssh/config >~/.ssh/config
+chmod go-rwx ~/.ssh/{config,passwd.asc}
+```
+
+and I need to remove the symbolic link `rm ~/.ssh/config`
+
 ### Terminal - Theme solarized
 
 [Solarized](http://ethanschoonover.com/solarized) is a sixteen color palette (eight monotones, eight accent colors) designed for use with terminal and gui applications. It has several [unique properties](http://ethanschoonover.com/solarized#features). I designed this colorscheme with both precise CIELAB lightness relationships and a refined set of hues based on fixed color wheel relationships. It has been tested extensively in real world use on color calibrated displays (as well as uncalibrated/intentionally miscalibrated displays) and in a variety of lighting conditions.
