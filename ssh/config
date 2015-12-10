@@ -173,10 +173,11 @@ IdentityFile %d/.ssh/id_amsxf01
 Host somos.cloop
 User root
 HostName 10.196.7.53
+ProxyCommand ssh -q amsxd01 -W %h:%p
 IdentityFile %d/.ssh/id_amsxf01
 
 Host cuias.somos.cloop
 User amix
 HostName 10.195.1.133
-IdentityFile %d/.ssh/id_amsxf01
 ProxyCommand ssh -q somos.cloop -W %h:%p
+IdentityFile %d/.ssh/id_amsxf01
