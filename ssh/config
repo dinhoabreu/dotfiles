@@ -170,14 +170,21 @@ User root
 HostName 10.56.3.20
 IdentityFile %d/.ssh/id_amsxf01
 
-Host somos.cloop
+Host somos.cloop 10.196.7.53
 User root
 HostName 10.196.7.53
+ServerAliveInterval 60
 ProxyCommand ssh -q amsxd01 -W %h:%p
 IdentityFile %d/.ssh/id_amsxf01
 
 Host cuias.somos.cloop
 User amix
 HostName 10.195.1.133
+ServerAliveInterval 60
 ProxyCommand ssh -q somos.cloop -W %h:%p
 IdentityFile %d/.ssh/id_amsxf01
+
+Host wilson srvzabbix.no-ip.info
+User root
+HostName srvzabbix.no-ip.info
+ProxyCommand ssh -q amsxd01 -W %h:%p
