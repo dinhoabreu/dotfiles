@@ -83,7 +83,7 @@ ln -s ~/dotfiles/ssh/passwd.asc ~/.ssh/passwd.asc
 chmod go-rwx ~/.ssh/{config,passwd.asc}
 ```
 
-Some cases like in my host `amsxd01` I have a git hook `.git/hooks/post-checkout`
+Some cases like in my host `amsxd01` I have a git hook `.git/hooks/post-checkout` and `ln -s post-checkout .git/hooks/post-merge`
 
 ```bash
 #!/usr/bin/env bash
