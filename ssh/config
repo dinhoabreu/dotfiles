@@ -81,6 +81,13 @@ User tfweb
 HostName 10.10.0.4
 IdentityFile %d/.ssh/id_amsxf01
 
+Host prd.web.tozzini 10.10.0.5
+User root
+HostName 10.10.0.5
+IdentityFile %d/.ssh/id_amsxf01
+ProxyCommand ssh -q dev.web.tozzini -W %h:%p
+LocalForward 8080 127.0.0.1:80
+
 Host autoresponse.tozzini
 User root
 HostName 10.10.0.202
