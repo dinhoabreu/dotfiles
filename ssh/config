@@ -195,3 +195,8 @@ Host wilson srvzabbix.no-ip.info
 User root
 HostName srvzabbix.no-ip.info
 ProxyCommand ssh -q amsxd01 -W %h:%p
+
+Host psql.amsxp03
+User postgres
+HostName 10.255.1.23
+IdentityFile %d/.ssh/id_amsxf01

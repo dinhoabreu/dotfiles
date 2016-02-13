@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+umask 0077
 ID=dinho.abreu@gmail.com
 case $1 in
   save)
