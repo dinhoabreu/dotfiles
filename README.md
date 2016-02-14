@@ -43,6 +43,14 @@ Edit your `.gitconfig`
   path = ~/dotfiles/gitconfig
 ```
 
+Enable [diff-so-fancy](https://github.com/stevemao/diff-so-fancy) to improve readability.
+
+```
+brew install gnu-sed
+npm install -g diff-so-fancy
+git dsf # dsf is a git-alias for diff-so-fancy
+```
+
 ### Tmux - config
 
 Locate `powerline.conf`
