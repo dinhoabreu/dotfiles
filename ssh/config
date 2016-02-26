@@ -93,6 +93,13 @@ IdentityFile %d/.ssh/id_amsxf01
 ProxyCommand ssh -q dev.web.tozzini -W %h:%p
 LocalForward 8080 127.0.0.1:80
 
+Host hom.intra.tozzini 10.10.0.28
+User root
+HostName 10.10.0.28
+IdentityFile %d/.ssh/id_amsxf01
+ProxyCommand ssh -q dev.web.tozzini -W %h:%p
+LocalForward 8080 127.0.0.1:80
+
 Host ub-prd.web.tozzini 10.10.0.6
 User root
 HostName 10.10.0.6
