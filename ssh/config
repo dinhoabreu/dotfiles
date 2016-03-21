@@ -1,10 +1,20 @@
 Compression yes
 ForwardAgent yes
 
+Host kbclient.example.com
+HostName kbclient.example.com
+GSSAPIAuthentication yes
+GSSAPIDelegateCredentials yes
+
 Host ikong
 HostName home.twdnet.com.br
 IdentityFile %d/.ssh/id_dsa
 ProxyCommand ssh -q amsxf01 -W %h:%p
+ServerAliveInterval 60
+
+Host twdnet
+HostName twdnet.com.br
+IdentityFile %d/.ssh/id_dsa
 ServerAliveInterval 60
 
 Host aws
@@ -65,6 +75,12 @@ host zabbix.azul 10.0.100.55
 User amix
 Hostname 10.0.100.55
 IdentityFile ~/.ssh/id_amsxf01
+
+host dc01.zabbix.azul 10.0.254.240
+User amix
+Hostname 10.0.254.240
+IdentityFile ~/.ssh/id_amsxf01
+ProxyCommand ssh -q zabbix.azul -W %h:%p
 
 Host 10.255.253.* hosts.cdf
 User root
@@ -220,3 +236,6 @@ Host psql.amsxp03
 User postgres
 HostName 10.255.1.23
 IdentityFile %d/.ssh/id_amsxf01
+
+Host dokku.me
+Port 22
