@@ -50,7 +50,7 @@ let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
