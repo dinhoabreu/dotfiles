@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-m4v_to_srt()
+to_srt()
 {
-  local name=`basename $1`
-  echo ${name/%m4v/srt}
+  local name=$(basename $1)
+  echo "${name%.*}.srt"
 }
 
 similar_text()
@@ -16,11 +16,14 @@ get_url()
   local srt=""
   local url=""
   local similarity=0
-  local values=(`subtitler $name --lang pob | grep Subtitle -A 1 | awk '{ print $2 }'`)
+  echo "name=$name" >&2
+  local values=($(subtitler $name --lang pob | grep Subtitle -A 1 | awk '{ print $2 }'))
+  echo "values=${values[*]}" >&2
   for ((i=0; i < ${#values[@]}; i+=2)) {
     local _srt="${values[i]}"
     local _url="${values[i+1]}"
-    local _similarity=`similar_text "$name" "$_srt"`
+    local _similarity=$(similar_text "$name" "$_srt")
+    echo "$_srt $_url $_similarity" >&2
     if ((_similarity > similarity)); then
       srt="$_srt"
       url="$_url"
@@ -34,20 +37,19 @@ srt_exists()
 {
   local name=$1
   local src=${2-.}
-  ok=`find $src -name $name`
+  ok=$(find $src -name $name)
   [ "$ok" != "" ]
 }
 
-find_m4v_add()
+find_movies_add()
 {
   local src=$1
-  for m4v in `find $src -name '*.m4v'`; do
-    name=`m4v_to_srt $m4v`
-    srt_exists $name $src
-    if [ $? -eq 0 ]; then
+  for movie in $(find $src -name '*.m4v' -or -name '*.mkv'); do
+    name=$(to_srt $movie)
+    if srt_exists $name $src; then
       echo [$name] already exists
     else
-      url=`get_url $name`
+      url=$(get_url $name)
       if [ "$url" == "" ]; then
         echo [$name] not found
         continue
@@ -61,4 +63,4 @@ find_m4v_add()
 }
 
 src=${1-.}
-find_m4v_add $src
+find_movies_add $src
