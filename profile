@@ -1,8 +1,9 @@
-#Path setup.
+# PATH setup
 export PATH=/usr/local/bin:${PATH}
 export PATH=${PATH}:/usr/local/sbin
 export PATH=${HOME}/bin:${PATH}
 export PATH=${HOME}/.composer/vendor/bin:${PATH}
+export PATH=${HOME}/.npm/bin:${PATH}
 export PATH=${HOME}/dotfiles/bin:${PATH}
 if [[ $OSTYPE == *darwin* ]]; then
   export PATH=${HOME}/dotfiles/bin/osx:${PATH}
@@ -17,6 +18,10 @@ export PATH=${HOME}/dotfiles_local/bin:${PATH}
 #   export SSL_CERT_FILE=/usr/local/etc/openssl/cert.pem
 # fi
 
+# nodejs setup
+NPM_PACKAGES=${HOME}/.npm
+export NODE_PATH=${NPM_PACKAGES}/lib/node_modules
+export N_PREFIX=${NPM_PACKAGES}
 
 #Create files as read-write by group and read-only world.
 umask 002
