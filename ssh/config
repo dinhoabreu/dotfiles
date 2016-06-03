@@ -11,11 +11,13 @@ HostName home.twdnet.com.br
 IdentityFile %d/.ssh/id_dsa
 ProxyCommand ssh -q amsxf01 -W %h:%p
 ServerAliveInterval 60
+#LocalForward 5901 127.0.0.1:5900
 
 Host twdnet
 HostName twdnet.com.br
 IdentityFile %d/.ssh/id_dsa
 ServerAliveInterval 60
+ProxyCommand ssh -q amsxf01 -W %h:%p
 
 Host aws
 User ubuntu
@@ -74,6 +76,11 @@ ProxyCommand ssh -q hom.cloop.azul -W %h:%p
 host zabbix.azul 10.0.100.55
 User amix
 Hostname 10.0.100.55
+IdentityFile ~/.ssh/id_amsxf01
+
+host zabbix2.azul 10.0.100.56
+User amix
+Hostname 10.0.100.56
 IdentityFile ~/.ssh/id_amsxf01
 
 host dc01.zabbix.azul 10.0.254.240
@@ -176,6 +183,11 @@ User root
 HostName 10.4.170.246
 IdentityFile %d/.ssh/id_amsxf01
 
+Host 10.253.14.129 zabbix.dasa
+User root
+HostName 10.253.14.129
+IdentityFile %d/.ssh/id_amsxf01
+
 Host 10.4.170.93 portal.gol
 User bases
 HostName 10.4.170.93
@@ -197,7 +209,7 @@ ProxyCommand ssh -q amsxf01 -W %h:%p
 
 Host zabbix.iesc
 User root
-HostName 10.254.0.103
+HostName 10.254.0.145
 IdentityFile %d/.ssh/id_amsxf01
 
 Host multi07.amix yuri.amix flavia.amix
@@ -239,3 +251,9 @@ IdentityFile %d/.ssh/id_amsxf01
 
 Host dokku.me
 Port 22
+
+Host tunnel-bitbucket.org
+User git
+HostName bitbucket.org
+IdentityFile %d/.ssh/id_rsa
+ProxyCommand ssh -q amsxd01 -W %h:%p
