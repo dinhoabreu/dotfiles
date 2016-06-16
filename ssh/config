@@ -187,6 +187,7 @@ Host 10.253.14.129 zabbix.dasa
 User root
 HostName 10.253.14.129
 IdentityFile %d/.ssh/id_amsxf01
+ServerAliveInterval 60
 
 Host 10.4.170.93 portal.gol
 User bases
