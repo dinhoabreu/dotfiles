@@ -193,6 +193,10 @@ User bases
 HostName 10.4.170.93
 IdentityFile ~/.ssh/id_amsxf01
 
+Host 10.4.170.224 rootnet.gol
+User root
+HostName 10.4.170.224
+
 Host 10.4.255.7 backup.portal.gol
 User bases
 HostName 10.4.255.7
