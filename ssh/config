@@ -218,7 +218,7 @@ HostName 10.254.0.145
 IdentityFile %d/.ssh/id_amsxf01
 
 Host multi07.amix yuri.amix flavia.amix
-HostName 10.255.1.191
+HostName 10.255.1.192
 
 Host aceite.ged.cba 10.56.4.9
 User root

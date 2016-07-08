@@ -2,6 +2,7 @@
     editor = vim
     autocrlf = input
     excludesfile = ~/dotfiles/gitignore
+    precomposeunicode = true
 [merge]
     tool = hvimdiff
 [color]
