@@ -17,6 +17,11 @@ Host twdnet
 HostName twdnet.com.br
 IdentityFile %d/.ssh/id_dsa
 ServerAliveInterval 60
+
+Host twdnet.amix
+HostName twdnet.com.br
+IdentityFile %d/.ssh/id_dsa
+ServerAliveInterval 60
 ProxyCommand ssh -q amsxf01 -W %h:%p
 
 Host aws
@@ -267,3 +272,8 @@ User git
 HostName bitbucket.org
 IdentityFile %d/.ssh/id_rsa
 ProxyCommand ssh -q amsxd01 -W %h:%p
+
+Host devs01 devs01.spo.oxxys.lan
+User amix
+HostName 10.255.1.164
+IdentityFile %d/.ssh/id_amsxf01
