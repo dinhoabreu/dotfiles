@@ -129,3 +129,7 @@ nmap <Leader>n :enew<CR>
 nmap <Leader><Leader> :NERDTreeToggle<CR>
 nmap <Leader>$ :call Preserve("%s/\\s\\+$//e")<CR>
 nmap <Leader>= :call Preserve("normal gg=G")<CR>
+
+" ======== Read .vimrc in current directory =========
+set exrc
+set secure
