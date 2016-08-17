@@ -59,24 +59,28 @@ function variables() {
 }
 
 #The command line prompt.
+red="\e[0;31m"
+blue="\e[0;34m"
+green="\e[0;32m"
+gray="\e[0;30m"
+white="\e[0;00m"
 case "$TERM" in
-    xterm) color_prompt=yes;;
-    xterm-color) color_prompt=yes;;
-    xterm-256color) color_prompt=yes;;
-    screen) color_prompt=yes;;
+    xterm|\
+    xterm-color|\
+    xterm-256color|\
+    screen|\
     screen-256color) color_prompt=yes;;
 esac
 if [ "$color_prompt" = yes ]; then
-    red="\[\033[0;31m\]"
-    blue="\[\033[0;34m\]"
-    green="\[\033[0;32m\]"
-    gray="\[\033[0;30m\]"
-    white="\[\033[0;00m\]"
     export PS1="$red\u$blue@\h$green:\W \$$white " # No date
     # export PS1="$gray[\$(date +'%Y-%m-%d %H:%M:%S')] $red\u$blue@\h$gray:$green\W \$$white "
 else
     export PS1='\u@\h:\w\n\$ ' #No date
     # export PS1="[\$(date +'%Y-%m-%d %H:%M:%S')] \u@\h:\w\n\$ "
+fi
+if [[ $TERM_PROGRAM == iTerm* ]]; then
+  iterm_title="\[\e]0;\u@\h:\w\a\]"
+  PS1="${iterm_title}$PS1"
 fi
 
 #The powerline
