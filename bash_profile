@@ -72,11 +72,11 @@ if [ "$color_prompt" = yes ]; then
     green="\[\033[0;32m\]"
     gray="\[\033[0;30m\]"
     white="\[\033[0;00m\]"
-    # export PS1="$red\u$blue@\h$green:\W \$$white " # No date
-    export PS1="$gray[\$(date +'%Y-%m-%d %H:%M:%S')] $red\u$blue@\h$gray:$green\W \$$white "
+    export PS1="$red\u$blue@\h$green:\W \$$white " # No date
+    # export PS1="$gray[\$(date +'%Y-%m-%d %H:%M:%S')] $red\u$blue@\h$gray:$green\W \$$white "
 else
-    # export PS1='\u@\h:\w\n\$ ' #No date
-    export PS1="[\$(date +'%Y-%m-%d %H:%M:%S')] \u@\h:\w\n\$ "
+    export PS1='\u@\h:\w\n\$ ' #No date
+    # export PS1="[\$(date +'%Y-%m-%d %H:%M:%S')] \u@\h:\w\n\$ "
 fi
 
 #The powerline
