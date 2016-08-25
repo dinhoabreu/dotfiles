@@ -59,11 +59,11 @@ function variables() {
 }
 
 #The command line prompt.
-red="\e[0;31m"
-blue="\e[0;34m"
-green="\e[0;32m"
-gray="\e[0;30m"
-white="\e[0;00m"
+red="\[\e[0;31m\]"
+blue="\[\e[0;34m\]"
+green="\[\e[0;32m\]"
+gray="\[\e[0;30m\]"
+white="\[\e[0;00m\]"
 case "$TERM" in
     xterm|\
     xterm-color|\
