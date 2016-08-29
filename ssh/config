@@ -1,5 +1,5 @@
 Compression yes
-ForwardAgent yes
+#ForwardAgent yes
 
 Host kbclient.example.com
 HostName kbclient.example.com
@@ -183,10 +183,27 @@ Host openvpn.tozzini
 User root
 HostName 10.10.0.118
 
-Host 10.4.170.246 zabbix.gol
-User root
-HostName 10.4.170.246
+Host 10.4.104.15 bastil1.gol
+HostName 10.4.104.15
+User amix.eea
 IdentityFile %d/.ssh/id_amsxf01
+
+Host 10.4.175.15 bastil2.gol
+HostName 10.4.175.15
+User amix.eea
+IdentityFile %d/.ssh/id_amsxf01
+
+Host 10.4.175.16 bastil3.gol
+HostName 10.4.175.16
+User amix.eea
+IdentityFile %d/.ssh/id_amsxf01
+ProxyCommand ssh -q bastil1.gol -W %h:%p
+
+Host 10.4.170.246 zabbix.gol
+User amix.eea
+HostName 10.4.170.246
+IdentityFile %d/.ssh/id_gol_bastil1
+ProxyCommand ssh -q bastil1.gol -W %h:%p
 
 Host 10.253.14.129 zabbix.dasa
 User root
