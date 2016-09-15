@@ -1,23 +1,31 @@
 #!/usr/bin/env bash
 
-# shellcheck disable=SC2034
 tmux_version_gte() {
 
-	local name version aux vref=$1
-	local tmux_major tmux_minor
-	local ref_major ref_minor
+	local re='^([0-9]+)\.([0-9]+)' version_ref=$1
+	local name version
+	local tmux_major=0 tmux_minor=0
+	local ref_major=0 ref_minor=1
 
+	# shellcheck disable=SC2034
 	read -r name version
-	IFS='.' read -r tmux_major tmux_minor aux <<<"$version"
-	IFS='.' read -r ref_major ref_minor aux <<<"$vref"
+	if [[ $version =~ $re ]]; then
+		tmux_major=${BASH_REMATCH[1]}
+		tmux_minor=${BASH_REMATCH[2]}
+	fi
+	if [[ $version_ref =~ $re ]]; then
+		ref_major=${BASH_REMATCH[1]}
+		ref_minor=${BASH_REMATCH[2]}
+	fi
 	(((100 * tmux_major + tmux_minor) >= (100 * ref_major + ref_minor)))
 }
 
+## Enable mouse control (clickable windows, panes, resizable panes)
 main() {
-	## Enable mouse control (clickable windows, panes, resizable panes)
 	if tmux -V | tmux_version_gte 2.1; then
 		tmux set -g mouse on
 	else
+		tmux set -g mode-mouse on
 		tmux set -g mouse-select-window on
 		tmux set -g mouse-select-pane on
 		tmux set -g mouse-resize-pane on
