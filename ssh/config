@@ -1,5 +1,7 @@
 Compression yes
-#ForwardAgent yes
+
+Host 10.255.1.* amsx*
+ForwardAgent yes
 
 Host kbclient.example.com
 HostName kbclient.example.com
@@ -224,9 +226,9 @@ Host 10.4.255.7 backup.portal.gol
 User bases
 HostName 10.4.255.7
 
-Host 52.2.155.112 portal.prime
+Host 52.206.145.35 portal.prime
 User amix
-HostName 52.2.155.112
+HostName 52.206.145.35
 IdentityFile ~/.ssh/id_amsxf01
 
 Host fw.stam 10.0.0.3
@@ -261,7 +263,7 @@ Host somos.cloop 10.196.7.53
 User root
 HostName 10.196.7.53
 ServerAliveInterval 60
-ProxyCommand ssh -q amsxd01 -W %h:%p
+ProxyCommand ssh -q amsxf01 -W %h:%p
 IdentityFile %d/.ssh/id_amsxf01
 
 Host cuias.somos.cloop
@@ -274,7 +276,7 @@ IdentityFile %d/.ssh/id_amsxf01
 Host wilson srvzabbix.no-ip.info
 User root
 HostName srvzabbix.no-ip.info
-ProxyCommand ssh -q amsxd01 -W %h:%p
+ProxyCommand ssh -q amsxf01 -W %h:%p
 
 Host psql.amsxp03
 User postgres
@@ -288,7 +290,7 @@ Host tunnel-bitbucket.org
 User git
 HostName bitbucket.org
 IdentityFile %d/.ssh/id_rsa
-ProxyCommand ssh -q amsxd01 -W %h:%p
+ProxyCommand ssh -q amsxf01 -W %h:%p
 
 Host devs01 devs01.spo.oxxys.lan
 User amix
