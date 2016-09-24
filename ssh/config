@@ -263,7 +263,7 @@ Host somos.cloop 10.196.7.53
 User root
 HostName 10.196.7.53
 ServerAliveInterval 60
-ProxyCommand ssh -q amsxf01 -W %h:%p
+ProxyCommand ssh -q amsxd01 -W %h:%p
 IdentityFile %d/.ssh/id_amsxf01
 
 Host cuias.somos.cloop
