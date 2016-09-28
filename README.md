@@ -8,6 +8,12 @@ Checkout this repo into `$HOME/dotfiles`
 git clone https://github.com/dinhoabreu/dotfiles.git $HOME/dotfiles
 ```
 
+### Add [bash-it](https://github.com/Bash-it/bash-it)
+
+```bash
+git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+```
+
 ### Shell - setup
 
 Edit your `.profile`
@@ -53,18 +59,9 @@ git dsf # dsf is a git-alias for diff-so-fancy
 
 ### Tmux - config
 
-Locate `powerline.conf`
-
-```bash
-python_resolver /powerline/bindings/tmux/powerline.conf
-# Example output: /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
-```
-
 Edit your `.tmux.conf`
 
 ```bash
-# Use the output of python_resolver here
-source-file /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
 source-file ~/dotfiles/tmux.conf
 ```
 
