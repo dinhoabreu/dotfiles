@@ -40,6 +40,16 @@ Plugin 'elzr/vim-json'
 Plugin 'restore_view.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'taglist.vim'
+
+" [SQL Style Guide](http://www.sqlstyle.guide/) align, indent and better syntax
+Plugin 'sql.vim--Stinson'
+Plugin 'Align'
+Plugin 'SQLUtilities' " <shift>V \sf
+let g:sqlutil_align_comma = 1
+let g:sqlutil_use_syntax_support = 0
+let g:sqlutil_align_where = 0
+let g:sqlutil_keyword_case = '\L'
 
 " Plugins setup
 if executable('tidy5')
