@@ -9,21 +9,21 @@ if [[ -f $HOME/.bashrc ]]; then
 	. "$HOME/.bashrc"
 fi
 
-#Test if "brew" exists
+# Test if "brew" exists
 if [[ -f $(command -v brew) ]] && [[ -f $(brew --prefix)/etc/bash_completion ]]; then
 	# shellcheck disable=SC1090
 	. "$(brew --prefix)/etc/bash_completion"
 fi
 
-#Command line editing options.
+# Command line editing options.
 set -o vi
 
-#Only "exit" or "logout" will log off the system.
-#set -o ignoreeof
+# Only "exit" or "logout" will log off the system.
+# set -o ignoreeof
 
-#Set up text editing/viewing.
+# Set up text editing/viewing.
 export LANG=en_US.utf-8
-export CLICOLOR=1 #Colorizes output of ls and others.
+export CLICOLOR=1 # Colorizes output of ls and others.
 export EDITOR=vim
 export VISUAL=$EDITOR
 export PAGER=less
@@ -31,18 +31,16 @@ export LESS='-F-X-S-R-i-P%f (%i/%m) Line %lt/%L' # Better prompt, case-insensiti
 
 export ENV=$HOME/.bashrc
 
-#Set up command history.
+# Set up command history.
 export HISTSIZE=10000
 export HISTFILESIZE=10000
-#Make shells wirte to history immediately instead of on exit.
+# Make shells wirte to history immediately instead of on exit.
 shopt -s histappend
-export PROMPT_COMMAND='history -a'
 
-#Aliases.
+# Aliases.
 alias ll='ls -ltr'
 
-
-#Functions.
+# Functions.
 function gitrm {
 	git status | grep 'deleted' | awk '{print $3}' | xargs git rm
 }
@@ -63,16 +61,16 @@ function variables() {
 	comm -23 <(declare) <(declare -f) ;
 }
 
-#Keep this last so it can override general settings!
+# Keep this last so it can override general settings!
 if [[ -f $HOME/dotfiles_local/bash_profile ]]; then
 	# shellcheck disable=SC1090
 	. "$HOME/dotfiles_local/bash_profile"
 fi
 
-#Set up fasd.
+# Set up fasd.
 [[ -f $(command -v fasd) ]] && eval "$(fasd --init auto)"
 
-#Bash-it
+# Bash-it
 if [[ -d ${HOME}/.bash_it ]]; then
 	export BASH_IT="${HOME}/.bash_it"
 	export BASH_IT_THEME='powerline'
