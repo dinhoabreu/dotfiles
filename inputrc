@@ -1,0 +1,7 @@
+set editing-mode vi
+#menu-complete-display-prefix on
+#set keymap vi-command
+#set bell-style visible
+#set colored-stats on
+"\C-x\C-r": re-read-init-file
+Control-l: clear-screen

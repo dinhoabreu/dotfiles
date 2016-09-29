@@ -40,6 +40,12 @@ if [ -f ~/dotfiles/bash_profile ]; then
 fi
 ```
 
+Edit your `.inputrc`
+
+```bash
+$include ~/dotfiles/inputrc
+```
+
 ### Git - config
 
 Edit your `.gitconfig`
