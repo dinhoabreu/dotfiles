@@ -15,6 +15,12 @@ if [[ -f $(command -v brew) ]] && [[ -f $(brew --prefix)/etc/bash_completion ]];
 	. "$(brew --prefix)/etc/bash_completion"
 fi
 
+# Bash-it
+if [[ -d $HOME/.bash_it ]] && [[ -f $HOME/dotfiles/bash_it ]]; then
+	# shellcheck disable=SC1090
+	. "$HOME/dotfiles/bash_it"
+fi
+
 # Command line editing options.
 set -o vi
 
@@ -44,10 +50,12 @@ alias ll='ls -ltr'
 function gitrm {
 	git status | grep 'deleted' | awk '{print $3}' | xargs git rm
 }
+
 function latest {
 	# shellcheck disable=SC2012,SC2086
 	ls -t $1/* | head -n 1
 }
+
 function toss {
 	for filename; do
 		if [[ -e $HOME/.Trash/$filename ]]; then
@@ -57,21 +65,7 @@ function toss {
 		fi
 	done
 }
+
 function variables() {
 	comm -23 <(declare) <(declare -f) ;
 }
-
-# Keep this last so it can override general settings!
-if [[ -f $HOME/dotfiles_local/bash_profile ]]; then
-	# shellcheck disable=SC1090
-	. "$HOME/dotfiles_local/bash_profile"
-fi
-
-# Set up fasd.
-[[ -f $(command -v fasd) ]] && eval "$(fasd --init auto)"
-
-# Bash-it
-if [[ -d $HOME/.bash_it ]] && [[ -f $HOME/dotfiles/bash_it ]]; then
-	# shellcheck disable=SC1090
-  . "$HOME/dotfiles/bash_it"
-fi

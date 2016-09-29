@@ -46,6 +46,24 @@ Edit your `.inputrc`
 $include ~/dotfiles/inputrc
 ```
 
+### Bash-it - aliases
+
+```bash
+bash-it enable alias tmux
+```
+
+### Bash-it - completions
+
+```bash
+bash-it enable completion git
+```
+
+### Bash-it - plugins
+
+```bash
+bash-it enable plugin fasd
+```
+
 ### Git - config
 
 Edit your `.gitconfig`
