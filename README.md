@@ -46,12 +46,6 @@ Edit your `.inputrc`
 $include ~/dotfiles/inputrc
 ```
 
-### Bash-it - plugins
-
-```bash
-bash-it enable plugin node nvm
-```
-
 ### Git - config
 
 Edit your `.gitconfig`

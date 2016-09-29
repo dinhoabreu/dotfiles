@@ -71,10 +71,7 @@ fi
 [[ -f $(command -v fasd) ]] && eval "$(fasd --init auto)"
 
 # Bash-it
-if [[ -d ${HOME}/.bash_it ]]; then
-	export BASH_IT="${HOME}/.bash_it"
-	export BASH_IT_THEME='powerline'
-	export SCM_CHECK=true
+if [[ -d $HOME/.bash_it ]] && [[ -f $HOME/dotfiles/bash_it ]]; then
 	# shellcheck disable=SC1090
-	source "$BASH_IT/bash_it.sh"
+  . "$HOME/dotfiles/bash_it"
 fi

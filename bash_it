@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+export BASH_IT="${HOME}/.bash_it"
+export BASH_IT_THEME='powerline'
+export SCM_CHECK=true
+
+# Performance issues
+# - https://github.com/creationix/nvm/issues/860
+nvm() {
+	# shellcheck disable=SC1090
+	source "$BASH_IT/plugins/available/nvm.plugin.bash"
+	nvm "$@"
+}
+
+# shellcheck disable=SC1090
+source "$BASH_IT/bash_it.sh"
+
+# PATH
+pathmunge ~/dotfiles/bin
+if [[ $OSTYPE == *darwin* ]]; then
+	pathmunge ~/dotfiles/bin/osx
+fi
+
+pathmunge ~/.composer/vendor/bin
+pathmunge ./node_modules/.bin
