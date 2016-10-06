@@ -51,6 +51,12 @@ let g:sqlutil_use_syntax_support = 0
 let g:sqlutil_align_where = 0
 let g:sqlutil_keyword_case = '\L'
 
+" Bash support
+" ERROR:
+" Mapping already in use: "<LocalLeader>sf", mode "n"
+" Mapping already in use: "<LocalLeader>sf", mode "v"
+" Plugin 'bash-support.vim'
+
 " Plugins setup
 if executable('tidy5')
   let g:syntastic_html_tidy_exec = 'tidy5'
