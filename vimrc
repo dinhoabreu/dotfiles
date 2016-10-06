@@ -125,6 +125,7 @@ colorscheme solarized
 nmap <Leader>[ :bp<CR>
 nmap <Leader>] :bn<CR>
 nmap <Leader>q :bd<CR>
+nmap <Leader>Q :BD<CR> " Plugin 'bufkill.vim'
 nmap <Leader>n :enew<CR>
 nmap <Leader><Leader> :NERDTreeToggle<CR>
 nmap <Leader>$ :call Preserve("%s/\\s\\+$//e")<CR>

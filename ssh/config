@@ -3,11 +3,6 @@ Compression yes
 Host 10.255.1.* amsx*
 ForwardAgent yes
 
-Host kbclient.example.com
-HostName kbclient.example.com
-GSSAPIAuthentication yes
-GSSAPIDelegateCredentials yes
-
 Host ikong
 HostName home.twdnet.com.br
 IdentityFile %d/.ssh/id_dsa

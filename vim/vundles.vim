@@ -43,15 +43,10 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'taglist.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-easytags'
-
-" [SQL Style Guide](http://www.sqlstyle.guide/) align, indent and better syntax
+Plugin 'bufkill.vim'
 Plugin 'sql.vim--Stinson'
 Plugin 'Align'
 Plugin 'SQLUtilities' " <shift>V \sf
-let g:sqlutil_align_comma = 1
-let g:sqlutil_use_syntax_support = 0
-let g:sqlutil_align_where = 0
-let g:sqlutil_keyword_case = '\L'
 
 " Bash support
 " ERROR:
@@ -91,6 +86,13 @@ let g:solarized_visibility = 'low'
 
 " let g:indentLine_char = '︙'
 let g:indentLine_noConcealCursor = ''
+
+let g:easytags_async = 1
+" [SQL Style Guide](http://www.sqlstyle.guide/) align, indent and better syntax
+let g:sqlutil_align_comma = 1
+let g:sqlutil_use_syntax_support = 0
+let g:sqlutil_align_where = 0
+let g:sqlutil_keyword_case = '\L'
 
 " Depends plugin 'ciaranm/detectindent'
 " autocmd BufRead * :DetectIndent
