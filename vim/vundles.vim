@@ -41,6 +41,8 @@ Plugin 'restore_view.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'taglist.vim'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
 
 " [SQL Style Guide](http://www.sqlstyle.guide/) align, indent and better syntax
 Plugin 'sql.vim--Stinson'
