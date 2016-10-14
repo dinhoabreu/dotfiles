@@ -16,7 +16,7 @@ main() {
 	
 	if cmd_exists osascript; then
 		status_right="$(tmux_get status-right)"
-		tmux set -g status-right "#[fg=colour42]#(osascript $PWD/applescripts/tunes.js) $status_right"
+    tmux set -g status-right "#[fg=colour42]#(osascript $PWD/applescripts/inbox.js) • #(osascript $PWD/applescripts/tunes.js) $status_right"
 	fi
 }
 
