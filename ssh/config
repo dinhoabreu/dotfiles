@@ -214,8 +214,10 @@ HostName 10.4.170.93
 IdentityFile ~/.ssh/id_amsxf01
 
 Host 10.4.170.224 rootnet.gol
-User root
+User amix.eea
 HostName 10.4.170.224
+IdentityFile %d/.ssh/id_gol_bastil1
+ProxyCommand ssh -q bastil1.gol -W %h:%p
 
 Host 10.4.255.7 backup.portal.gol
 User bases
