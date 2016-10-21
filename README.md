@@ -102,6 +102,14 @@ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 vim --noplugin -u ~/.vim/vundles.vim -N "+set hidden" "+syntax on" +BundleClean +BundleInstall +qall
 ```
 
+To add spell brasilian portuguese language, download 
+[pt_BR dictionary](http://downloads.sourceforge.net/project/aoo-extensions/1375/8/vero_pt_br_v208aoc.oxt?r=http%3A%2F%2Fextensions.openoffice.org%2Fen%2Fproject%2Fvero-brazilian-portuguese-spellchecking-dictionary-hyphenator&ts=1477079390&use_mirror=ufpr)
+and rename file to `vero_pt_br_v208aoc.oxt.zip`. Extract the file `/tmp/pt_BR.dic` into `/tmp/` then run following command on vim:
+
+```
+:mkspell ~/.vim/spell/pt /tmp/pt_BR
+```
+
 ### SSH - config
 
 Link `ssh/config` and `ssh/passwd.asc` to `$HOME/.ssh/`
