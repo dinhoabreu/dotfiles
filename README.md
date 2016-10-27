@@ -126,6 +126,8 @@ and I need to remove the symbolic link `rm ~/.ssh/config`
 ### Terminal - Theme solarized
 
 [Solarized](http://ethanschoonover.com/solarized) is a sixteen color palette (eight monotones, eight accent colors) designed for use with terminal and gui applications. It has several [unique properties](http://ethanschoonover.com/solarized#features). I designed this colorscheme with both precise CIELAB lightness relationships and a refined set of hues based on fixed color wheel relationships. It has been tested extensively in real world use on color calibrated displays (as well as uncalibrated/intentionally miscalibrated displays) and in a variety of lighting conditions.
+[Nerd-fonts](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf) for [vim-devicons](https://github.com/ryanoasis/vim-devicons) plugin.
+Download and configure nerd-fonts into iTerm!
 
 ## Commands
 

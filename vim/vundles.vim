@@ -23,7 +23,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mattn/emmet-vim'
@@ -47,6 +47,7 @@ Plugin 'bufkill.vim'
 Plugin 'sql.vim--Stinson'
 Plugin 'Align'
 Plugin 'SQLUtilities' " <shift>V \sf
+Plugin 'ryanoasis/vim-devicons'
 
 " Bash support
 " ERROR:
