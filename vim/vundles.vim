@@ -48,6 +48,7 @@ Plugin 'sql.vim--Stinson'
 Plugin 'Align'
 Plugin 'SQLUtilities' " <shift>V \sf
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Bash support
 " ERROR:
