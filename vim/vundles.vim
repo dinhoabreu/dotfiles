@@ -23,7 +23,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mattn/emmet-vim'
@@ -41,15 +41,20 @@ Plugin 'restore_view.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'taglist.vim'
-
-" [SQL Style Guide](http://www.sqlstyle.guide/) align, indent and better syntax
+Plugin 'xolox/vim-misc'
+" Plugin 'xolox/vim-easytags'
+Plugin 'bufkill.vim'
 Plugin 'sql.vim--Stinson'
 Plugin 'Align'
 Plugin 'SQLUtilities' " <shift>V \sf
-let g:sqlutil_align_comma = 1
-let g:sqlutil_use_syntax_support = 0
-let g:sqlutil_align_where = 0
-let g:sqlutil_keyword_case = '\L'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" Bash support
+" ERROR:
+" Mapping already in use: "<LocalLeader>sf", mode "n"
+" Mapping already in use: "<LocalLeader>sf", mode "v"
+" Plugin 'bash-support.vim'
 
 " Plugins setup
 if executable('tidy5')
@@ -83,6 +88,13 @@ let g:solarized_visibility = 'low'
 
 " let g:indentLine_char = '︙'
 let g:indentLine_noConcealCursor = ''
+
+let g:easytags_async = 1
+" [SQL Style Guide](http://www.sqlstyle.guide/) align, indent and better syntax
+let g:sqlutil_align_comma = 1
+let g:sqlutil_use_syntax_support = 0
+let g:sqlutil_align_where = 0
+let g:sqlutil_keyword_case = '\L'
 
 " Depends plugin 'ciaranm/detectindent'
 " autocmd BufRead * :DetectIndent

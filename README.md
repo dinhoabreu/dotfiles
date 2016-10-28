@@ -8,6 +8,12 @@ Checkout this repo into `$HOME/dotfiles`
 git clone https://github.com/dinhoabreu/dotfiles.git $HOME/dotfiles
 ```
 
+### Add [bash-it](https://github.com/Bash-it/bash-it)
+
+```bash
+git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
+```
+
 ### Shell - setup
 
 Edit your `.profile`
@@ -34,6 +40,30 @@ if [ -f ~/dotfiles/bash_profile ]; then
 fi
 ```
 
+Edit your `.inputrc`
+
+```bash
+$include ~/dotfiles/inputrc
+```
+
+### Bash-it - aliases
+
+```bash
+bash-it enable alias tmux
+```
+
+### Bash-it - completions
+
+```bash
+bash-it enable completion git
+```
+
+### Bash-it - plugins
+
+```bash
+bash-it enable plugin fasd
+```
+
 ### Git - config
 
 Edit your `.gitconfig`
@@ -53,18 +83,9 @@ git dsf # dsf is a git-alias for diff-so-fancy
 
 ### Tmux - config
 
-Locate `powerline.conf`
-
-```bash
-python_resolver /powerline/bindings/tmux/powerline.conf
-# Example output: /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
-```
-
 Edit your `.tmux.conf`
 
 ```bash
-# Use the output of python_resolver here
-source-file /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
 source-file ~/dotfiles/tmux.conf
 ```
 
@@ -79,6 +100,14 @@ ln -s ~/dotfiles/vim ~/.vim
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 # Install plugins
 vim --noplugin -u ~/.vim/vundles.vim -N "+set hidden" "+syntax on" +BundleClean +BundleInstall +qall
+```
+
+To add spell brasilian portuguese language, download 
+[pt_BR dictionary](http://downloads.sourceforge.net/project/aoo-extensions/1375/8/vero_pt_br_v208aoc.oxt?r=http%3A%2F%2Fextensions.openoffice.org%2Fen%2Fproject%2Fvero-brazilian-portuguese-spellchecking-dictionary-hyphenator&ts=1477079390&use_mirror=ufpr)
+and rename file to `vero_pt_br_v208aoc.oxt.zip`. Extract the file `/tmp/pt_BR.dic` into `/tmp/` then run following command on vim:
+
+```
+:mkspell ~/.vim/spell/pt /tmp/pt_BR
 ```
 
 ### SSH - config
@@ -105,6 +134,8 @@ and I need to remove the symbolic link `rm ~/.ssh/config`
 ### Terminal - Theme solarized
 
 [Solarized](http://ethanschoonover.com/solarized) is a sixteen color palette (eight monotones, eight accent colors) designed for use with terminal and gui applications. It has several [unique properties](http://ethanschoonover.com/solarized#features). I designed this colorscheme with both precise CIELAB lightness relationships and a refined set of hues based on fixed color wheel relationships. It has been tested extensively in real world use on color calibrated displays (as well as uncalibrated/intentionally miscalibrated displays) and in a variety of lighting conditions.
+[Nerd-fonts](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf) for [vim-devicons](https://github.com/ryanoasis/vim-devicons) plugin.
+Download and configure nerd-fonts into iTerm!
 
 ## Commands
 

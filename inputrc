@@ -1,0 +1,21 @@
+set echo-control-characters off
+set show-all-if-unmodified on
+set show-all-if-ambiguous on
+set bell-style visible
+set colored-stats on
+set menu-complete-display-prefix on
+
+set editing-mode vi
+$if mode=vi
+set keymap vi-command
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+set keymap vi-insert
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+$endif
+
+"\C-x\C-r": re-read-init-file
+"\C-l": clear-screen
+"\e[1~": backward-word
+"\e[4~": forward-word
