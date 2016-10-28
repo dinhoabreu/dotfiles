@@ -96,6 +96,15 @@ let g:sqlutil_use_syntax_support = 0
 let g:sqlutil_align_where = 0
 let g:sqlutil_keyword_case = '\L'
 
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:DevIconsEnableFolderPatternMatching = 1
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sass'] = ''
+let s:pink = "CB6F6F"
+let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExtensionHighlightColor['sass'] = s:pink " sets the color of css files to blue
+
 " Depends plugin 'ciaranm/detectindent'
 " autocmd BufRead * :DetectIndent
 
