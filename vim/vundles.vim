@@ -49,6 +49,7 @@ Plugin 'Align'
 Plugin 'SQLUtilities' " <shift>V \sf
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'tpope/vim-abolish'
 
 " Bash support
 " ERROR:
