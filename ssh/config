@@ -298,3 +298,10 @@ Host alan.amix
 User alan
 HostName 10.255.1.146
 IdentityFile %d/.ssh/id_amsxf01
+
+Host host1.lbca
+User opc
+HostName 129.152.132.219
+IdentityFile %d/.ssh/id_lbca
+ProxyCommand ssh -q amsxf01 -W %h:%p
+ServerAliveInterval 60
