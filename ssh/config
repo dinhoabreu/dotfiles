@@ -6,6 +6,7 @@ ForwardAgent yes
 Host ikong
 HostName home.twdnet.com.br
 IdentityFile %d/.ssh/id_dsa
+Port 54322
 ProxyCommand ssh -q amsxf01 -W %h:%p
 ServerAliveInterval 60
 #LocalForward 5901 127.0.0.1:5900
@@ -185,6 +186,13 @@ HostName 10.4.104.15
 User amix.eea
 IdentityFile %d/.ssh/id_amsxf01
 
+Host 10.4.170.246 rdesktop.gol
+User amix.eea
+HostName 10.4.170.246
+IdentityFile %d/.ssh/id_gol_bastil1
+ProxyCommand ssh -q bastil1.gol -W %h:%p
+LocalForward 127.0.0.1:3389 10.4.175.10:3389
+
 Host 10.4.175.15 bastil2.gol
 HostName 10.4.175.15
 User amix.eea
@@ -244,7 +252,8 @@ HostName 10.254.0.145
 IdentityFile %d/.ssh/id_amsxf01
 
 Host multi07.amix yuri.amix flavia.amix
-HostName 10.255.1.192
+User amix
+HostName 10.255.1.164
 
 Host aceite.ged.cba 10.56.4.9
 User root
@@ -270,9 +279,10 @@ ServerAliveInterval 60
 ProxyCommand ssh -q somos.cloop -W %h:%p
 IdentityFile %d/.ssh/id_amsxf01
 
-Host wilson srvzabbix.no-ip.info
+Host wilson zabbix.wers.com.br
 User root
-HostName srvzabbix.no-ip.info
+HostName zabbix.wers.com.br
+Port 6951
 ProxyCommand ssh -q amsxf01 -W %h:%p
 
 Host psql.amsxp03
@@ -298,6 +308,15 @@ Host alan.amix
 User alan
 HostName 10.255.1.146
 IdentityFile %d/.ssh/id_amsxf01
+
+Host 10.8.1.63 zabbix.danone
+User root
+HostName 10.8.1.63
+
+Host amsxp02
+User edison
+HostName amsxp02
+IdentityFile %d/.ssh/id_rsa
 
 Host host1.lbca
 User opc
