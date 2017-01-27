@@ -5,6 +5,13 @@ set bell-style visible
 set colored-stats on
 set menu-complete-display-prefix on
 
+# Enable input accents
+set convert-meta off
+set enable-meta-key on
+set input-meta on
+set meta-flag on
+set output-meta on
+
 set editing-mode vi
 $if mode=vi
 set keymap vi-command
