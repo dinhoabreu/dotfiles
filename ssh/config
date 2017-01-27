@@ -1,4 +1,7 @@
 Compression yes
+# macOS
+# AddKeysToAgent yes
+# UseKeychain yes
 
 Host 10.255.1.* amsx*
 ForwardAgent yes
@@ -178,8 +181,15 @@ User root
 HostName 10.10.0.71
 
 Host openvpn.tozzini
-User root
+User amix.eea
 HostName 10.10.0.118
+IdentityFile %d/.ssh/id_tozzini_bastil1
+ProxyCommand ssh -q bastil1.tozzini -W %h:%p
+
+Host bastil1.tozzini 10.10.0.43
+User amix.eea
+HostName 10.10.0.43
+IdentityFile %d/.ssh/id_amsxf01
 
 Host 10.4.104.15 bastil1.gol
 HostName 10.4.104.15
