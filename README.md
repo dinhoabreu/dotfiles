@@ -46,6 +46,12 @@ Edit your `.inputrc`
 $include ~/dotfiles/inputrc
 ```
 
+### Bash-it - base
+
+```bash
+bash-it enable plugin base
+```
+
 ### Bash-it - aliases
 
 ```bash
@@ -61,6 +67,7 @@ bash-it enable completion git
 ### Bash-it - plugins
 
 ```bash
+brew install fasd
 bash-it enable plugin fasd
 ```
 
@@ -104,7 +111,16 @@ vim --noplugin -u ~/.vim/vundles.vim -N "+set hidden" "+syntax on" +BundleClean 
 
 To add spell brasilian portuguese language, download 
 [pt_BR dictionary](http://downloads.sourceforge.net/project/aoo-extensions/1375/8/vero_pt_br_v208aoc.oxt?r=http%3A%2F%2Fextensions.openoffice.org%2Fen%2Fproject%2Fvero-brazilian-portuguese-spellchecking-dictionary-hyphenator&ts=1477079390&use_mirror=ufpr)
-and rename file to `vero_pt_br_v208aoc.oxt.zip`. Extract the file `/tmp/pt_BR.dic` into `/tmp/` then run following command on vim:
+and rename file to `vero_pt_br_v208aoc.oxt.zip`.
+
+```
+mv vero_pt_br_v208aoc.oxt.zip /tmp/
+cd /tmp/
+unzip vero_pt_br_v208aoc.oxt.zip
+mkdir ~/.vim/spell
+```
+
+Then run following command on vim:
 
 ```
 :mkspell ~/.vim/spell/pt /tmp/pt_BR
