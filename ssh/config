@@ -246,6 +246,13 @@ User amix
 HostName 52.206.145.35
 IdentityFile ~/.ssh/id_amsxf01
 
+Host portal.prime.amix
+User centos
+HostName 52.206.145.35
+IdentityFile ~/.ssh/prime.pem
+ProxyCommand ssh -q amsxf01 -W %h:%p
+
+
 Host fw.stam 10.0.0.3
 User root
 HostName 10.0.0.3
@@ -323,6 +330,14 @@ Host 10.8.1.63 zabbix.danone
 User root
 HostName 10.8.1.63
 
+Host 172.16.0.1 fw.danone
+User root
+HostName 172.16.0.1
+IdentityFile %d/.ssh/id_amsxf01
+LocalForward 8081 172.16.0.1:81
+LocalForward 8082 172.16.0.1:82
+LocalForward 8083 172.16.0.1:83
+
 Host amsxp02
 User edison
 HostName amsxp02
@@ -334,3 +349,23 @@ HostName 129.152.132.219
 IdentityFile %d/.ssh/id_lbca
 ProxyCommand ssh -q amsxf01 -W %h:%p
 ServerAliveInterval 60
+
+Host dev.wp.sfp
+User administrator
+HostName 187.18.54.217
+IdentityFile %d/.ssh/id_dv_sfp
+Port 22
+	ProxyCommand ssh -q amsxf01 -W %h:%p
+ServerAliveInterval 60
+
+Host gptw.aws.amix
+User richard
+HostName gptw.info
+IdentityFile %d/id_rsa
+ProxyCommand ssh -q amsxf01 -W %h:%p
+
+Host nginx.gptw.aws.amix
+User ec2-user
+HostName ec2-54-203-2-92.us-west-2.compute.amazonaws.com
+IdentityFile %d/id_rsa
+ProxyCommand ssh -q amsxf01 -W %h:%p
