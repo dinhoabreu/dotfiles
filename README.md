@@ -56,6 +56,7 @@ bash-it enable plugin base
 
 ```bash
 bash-it enable alias tmux
+bash-it enable alias git
 ```
 
 ### Bash-it - completions
