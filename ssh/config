@@ -321,3 +321,22 @@ Host host1.lbca.amix
   HostName 129.152.132.219
   IdentityFile %d/.ssh/id_lbca
   ServerAliveInterval 60
+
+# Sinafresp
+Host dev.wp.sfp.amix
+  User administrator
+  HostName 187.18.54.217
+  IdentityFile %d/.ssh/id_dv_sfp
+  Port 22
+
+# GPTW
+Host gptw.aws.amix
+  User richard
+  HostName 54.201.133.78
+  IdentityFile %d/id_rsa
+
+# VPN 10.255.251.10
+Host nginx.gptw.aws.amix
+  User ec2-user
+  HostName ec2-54-68-65-182.us-west-2.compute.amazonaws.com
+  IdentityFile %d/id_rsa
