@@ -43,11 +43,11 @@ Host psql.amsxp03
   HostName 10.255.1.23
   IdentityFile %d/.ssh/id_amsxf01
 
-Host bitbucket.org
+Host tunnel-bitbucket.org
   User git
   HostName bitbucket.org
   IdentityFile %d/.ssh/id_rsa
-  #ProxyCommand ssh -q amsxf01 -W %h:%p
+  ProxyCommand ssh -q amsxf01 -W %h:%p
 
 Host flavia
   User amix
