@@ -50,6 +50,9 @@ Plugin 'SQLUtilities' " <shift>V \sf
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'tpope/vim-abolish'
+" Typescript Syntax
+Plugin 'leafgarland/typescript-vim'
+Plugin 'herringtondarkholme/yats.vim'
 
 " Bash support
 " ERROR:
