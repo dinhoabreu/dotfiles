@@ -25,6 +25,11 @@ Host *.amix
 Host amsx*
   ForwardAgent yes
 
+Host amsxd09 gitlab.oxxys.lan
+  User root
+  HostName 10.255.1.49
+  IdentityFile %d/.ssh/id_rsa
+
 Host amsxp02
   User edison
   HostName amsxp02
