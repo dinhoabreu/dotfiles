@@ -115,5 +115,8 @@ let g:NERDTreeExtensionHighlightColor['sass'] = s:pink " sets the color of css f
 
 " autocmd BufRead * :EditorConfigReload
 
+" Fix filetype *.ts
+autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
+
 "Filetype plugin indent on is required by vundle
 filetype plugin indent on
