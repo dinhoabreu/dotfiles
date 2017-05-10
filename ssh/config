@@ -135,57 +135,14 @@ Host root.dev.web.tozzini
   HostName 10.10.0.4
   IdentityFile %d/.ssh/id_amsxf01
 
-Host prd.web.tozzini
+Host dev.intranet.tozzini
   User root
   HostName 10.10.0.5
   IdentityFile %d/.ssh/id_amsxf01
   ProxyCommand ssh -q dev.web.tozzini -W %h:%p
   LocalForward 8080 127.0.0.1:80
 
-Host hom.intra.tozzini
-  User root
-  HostName 10.10.0.28
-  IdentityFile %d/.ssh/id_amsxf01
-  ProxyCommand ssh -q dev.web.tozzini -W %h:%p
-  LocalForward 8080 127.0.0.1:80
-
-Host ub-prd.web.tozzini
-  User root
-  HostName 10.10.0.6
-  IdentityFile %d/.ssh/id_amsxf01
-  ProxyCommand ssh -q dev.web.tozzini -W %h:%p
-  LocalForward 8080 127.0.0.1:80
-
-Host autoresponse.tozzini
-  User root
-  HostName 10.10.0.202
-  Port 6951
-  IdentityFile %d/.ssh/id_amsxf01
-  ProxyCommand ssh -q dev.web.tozzini -W %h:%p
-  LocalForward 3080 127.0.0.1:80
-
-Host ext.intra.tozzini
-  User root
-  HostName 10.10.0.12
-  IdentityFile %d/.ssh/id_amsxf01
-
-Host int.intra.tozzini
-  User root
-  HostName 10.10.0.15
-  IdentityFile %d/.ssh/id_amsxf01
-  ProxyCommand ssh -q dev.web.tozzini -W %h:%p
-
-Host hom.int.intra.tozzini
-  User root
-  HostName 10.10.0.14
-  IdentityFile %d/.ssh/id_amsxf01
-
-Host old.systemweb.tozzini
-  User root
-  HostName 10.10.0.77
-  IdentityFile %d/.ssh/id_amsxf01
-
-Host systemweb.tozzini
+Host prd.systemweb.tozzini
   User root
   HostName 10.10.0.68
   IdentityFile %d/.ssh/id_amsxf01
@@ -194,10 +151,6 @@ Host dev.systemweb.tozzini
   User root
   HostName 10.10.0.70
   IdentityFile %d/.ssh/id_amsxf01
-
-Host systemweb2.tozzini
-  User root
-  HostName 10.10.0.71
 
 Host openvpn.tozzini
   User amix.eea
@@ -209,6 +162,12 @@ Host bastil1.tozzini
   User amix.eea
   HostName 10.10.0.43
   IdentityFile %d/.ssh/id_amsxf01
+
+Host dc.intranet.tozzini
+	User tfweb
+	HostName 172.16.120.103
+  IdentityFile %d/.ssh/id_amsxf01
+	ProxyCommand ssh -q dev.web.tozzini -W %h:%p
 
 # Gol
 Host bastil1.gol
@@ -269,10 +228,10 @@ Host zabbix.dasa
   IdentityFile %d/.ssh/id_amsxf01
 
 # Prime
-Host portal.prime
-  User amix
+Host portal.prime portal.prime.amix
+  User centos
   HostName 52.206.145.35
-  IdentityFile ~/.ssh/id_amsxf01
+  IdentityFile ~/.ssh/prime.pem
 
 # Stam
 Host fw.stam
@@ -320,6 +279,14 @@ Host zabbix.danone
   User root
   HostName 10.8.1.63
 
+Host byod.danone.amix
+	User root
+	HostName 172.16.0.1
+  IdentityFile %d/.ssh/id_amsxf01
+  LocalForward 8081 172.16.0.1:81
+  LocalForward 8082 172.16.0.1:82
+  LocalForward 8083 172.16.0.1:83
+
 # LBCA
 Host host1.lbca.amix
   User opc
@@ -343,5 +310,6 @@ Host gptw.aws.amix
 # VPN 10.255.251.10
 Host nginx.gptw.aws.amix
   User ec2-user
-  HostName ec2-54-68-65-182.us-west-2.compute.amazonaws.com
+  #HostName ec2-54-68-65-182.us-west-2.compute.amazonaws.com
+  HostName 10.255.251.10
   IdentityFile %d/id_rsa

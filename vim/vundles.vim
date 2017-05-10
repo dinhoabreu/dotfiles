@@ -53,6 +53,7 @@ Plugin 'tpope/vim-abolish'
 " Typescript Syntax
 Plugin 'leafgarland/typescript-vim'
 Plugin 'herringtondarkholme/yats.vim'
+Plugin 'quramy/tsuquyomi'
 
 " Bash support
 " ERROR:
@@ -66,6 +67,7 @@ if executable('tidy5')
 endif
 
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 "let g:syntastic_check_on_open = 0
