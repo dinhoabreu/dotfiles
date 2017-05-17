@@ -129,6 +129,7 @@ Host dev.web.tozzini
   User tfweb
   HostName 10.10.0.4
   IdentityFile %d/.ssh/id_amsxf01
+  LocalForward 192.168.33.1:3306 10.120.0.133:3306
 
 Host root.dev.web.tozzini
   User root
