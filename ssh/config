@@ -200,19 +200,18 @@ Host zabbix.bastil1.gol zabbix.bastil2.gol zabbix.bastil3.gol
   User amix.eea
   HostName 10.4.170.246
 
-Host portal.gol
-  User bases
-  HostName 10.4.170.93
-  IdentityFile ~/.ssh/id_amsxf01
-
 Host rootnet.gol
   User amix.eea
   HostName 10.4.170.224
   IdentityFile %d/.ssh/id_gol_bastil1
   ProxyCommand ssh -q bastil1.gol -W %h:%p
 
-Host backup.portal.gol
-  User bases
+Host portal.bastil1.gol
+  User amix.eea
+  HostName 10.4.170.93
+
+Host backup.portal.bastil1.gol
+  User amix.eea
   HostName 10.4.255.7
 
 Host rdesktop.gol
