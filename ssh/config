@@ -248,7 +248,7 @@ Host rn.iurd.amix
 Host zabbix.iesc
   User root
   HostName 10.254.0.145
-  IdentityFile %d/.ssh/id_amsxf01
+  IdentityFile %d/.ssh/id_rsa
 
 # CBA
 Host aceite.ged.cba
