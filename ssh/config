@@ -7,204 +7,209 @@ UseKeychain yes
 
 # Home
 Host ubuntu01
-  User root
-  HostName 192.168.10.15
-  IdentityFile %d/.ssh/id_rsa
+	User root
+	HostName 192.168.10.15
+	IdentityFile %d/.ssh/id_rsa
 
 Host mpro01
-  HostName 10.255.1.123
+	HostName 10.255.1.123
 
 # AMIX
 Host amsxf01
-  User edison
-  HostName 10.255.1.1
+	User edison
+	HostName 10.255.1.1
 
 Host *.amix
-  ProxyCommand ssh -q amsxf01 -W %h:%p
+	ProxyCommand ssh -q amsxf01 -W %h:%p
 
 Host amsx*
-  ForwardAgent yes
+	ForwardAgent yes
 
 Host amsxd09 gitlab.oxxys.lan
-  User root
-  HostName 10.255.1.49
-  IdentityFile %d/.ssh/id_rsa
+	User root
+	HostName 10.255.1.49
+	IdentityFile %d/.ssh/id_rsa
 
 Host amsxp02
-  User edison
-  HostName amsxp02
-  IdentityFile %d/.ssh/id_rsa
+	User edison
+	HostName amsxp02
+	IdentityFile %d/.ssh/id_rsa
 
 Host rootspot.amix
-  User root
-  HostName 10.255.20.9
-  IdentityFile %d/.ssh/id_amsxf01
-  LocalForward 8081 10.255.20.9:8081
-  LocalForward 8082 10.255.20.9:8082
-  LocalForward 8083 10.255.20.9:8083
+	User root
+	HostName 10.255.20.9
+	IdentityFile %d/.ssh/id_amsxf01
+	LocalForward 8081 10.255.20.9:8081
+	LocalForward 8082 10.255.20.9:8082
+	LocalForward 8083 10.255.20.9:8083
 
 Host psql.amsxp03
-  User postgres
-  HostName 10.255.1.23
-  IdentityFile %d/.ssh/id_amsxf01
+	User postgres
+	HostName 10.255.1.23
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host tunnel-bitbucket.org
-  User git
-  HostName bitbucket.org
-  IdentityFile %d/.ssh/id_rsa
-  ProxyCommand ssh -q amsxf01 -W %h:%p
+	User git
+	HostName bitbucket.org
+	IdentityFile %d/.ssh/id_rsa
+	ProxyCommand ssh -q amsxf01 -W %h:%p
 
 Host flavia
-  User amix
-  HostName 10.255.1.164
+	User amix
+	HostName 10.255.1.164
 
 Host alan
-  User alan
-  HostName 10.255.1.146
-  IdentityFile %d/.ssh/id_amsxf01
+	User alan
+	HostName 10.255.1.146
+	IdentityFile %d/.ssh/id_amsxf01
 
 # Bohler
 Host bohler bohler.amix
-  User root
-  HostName 172.25.80.18
-  IdentityFile %d/.ssh/id_amsxf01
-  LocalForward 51433 172.16.27.101:1433
+	User root
+	HostName 172.25.80.18
+	IdentityFile %d/.ssh/id_amsxf01
+	LocalForward 51433 172.16.27.101:1433
 
 # Azul
 Host rn.azul rn.azul.amix
-  User root
-  HostName 10.0.254.249
-  IdentityFile %d/.ssh/id_amsxf01
+	User root
+	HostName 10.0.254.249
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host prod.cloop.azul
-  User amix
-  HostName 10.0.5.110
-  IdentityFile %d/.ssh/id_rsa
+	User amix
+	HostName 10.0.5.110
+	IdentityFile %d/.ssh/id_rsa
 
 Host prod.certdig.azul
-  User amix
-  HostName 10.0.5.168
-  ProxyCommand ssh -q prod.cloop.azul -W %h:%p
+	User amix
+	HostName 10.0.5.168
+	ProxyCommand ssh -q prod.cloop.azul -W %h:%p
 
 Host hom.cloop.azul
-  User amix
-  HostName 10.0.10.110
-  IdentityFile %d/.ssh/id_rsa
+	User amix
+	HostName 10.0.10.110
+	IdentityFile %d/.ssh/id_rsa
 
 Host hom.certdig.azul
-  User amix
-  HostName 10.0.10.168
-  ProxyCommand ssh -q hom.cloop.azul -W %h:%p
+	User amix
+	HostName 10.0.10.168
+	ProxyCommand ssh -q hom.cloop.azul -W %h:%p
 
 host zabbix.azul
-  User amix
-  Hostname 10.0.100.55
-  IdentityFile ~/.ssh/id_amsxf01
+	User amix
+	Hostname 10.0.100.55
+	IdentityFile ~/.ssh/id_amsxf01
 
 host zabbix2.azul
-  User amix
-  Hostname 10.0.100.56
-  IdentityFile ~/.ssh/id_amsxf01
+	User amix
+	Hostname 10.0.100.56
+	IdentityFile ~/.ssh/id_amsxf01
 
 host dc01.zabbix.azul
-  User amix
-  Hostname 10.0.254.240
-  IdentityFile ~/.ssh/id_amsxf01
-  ProxyCommand ssh -q zabbix.azul -W %h:%p
+	User amix
+	Hostname 10.0.254.240
+	IdentityFile ~/.ssh/id_amsxf01
+	ProxyCommand ssh -q zabbix.azul -W %h:%p
 
 # CDF
 Host 10.255.253.* hosts.cdf
-  User root
-  IdentityFile %d/.ssh/id_amsxf01
-  ProxyCommand ssh -q amsxf01 -W %h:%p
-  #LocalForward 8081 10.190.24.1:8081
-  #LocalForward 8082 10.190.24.1:8082
-  #LocalForward 8083 10.190.24.1:8083
-  #LocalForward 9081 10.190.56.1:9081
-  #LocalForward 9082 10.190.56.1:9082
-  #LocalForward 9083 10.190.56.1:9083
+	User root
+	IdentityFile %d/.ssh/id_amsxf01
+	ProxyCommand ssh -q amsxf01 -W %h:%p
+	#LocalForward 8081 10.190.24.1:8081
+	#LocalForward 8082 10.190.24.1:8082
+	#LocalForward 8083 10.190.24.1:8083
+	#LocalForward 9081 10.190.56.1:9081
+	#LocalForward 9082 10.190.56.1:9082
+	#LocalForward 9083 10.190.56.1:9083
 
 # Tozzini
 Host dev.web.tozzini
-  User tfweb
-  HostName 10.10.0.4
-  IdentityFile %d/.ssh/id_amsxf01
-  LocalForward 192.168.33.1:3306 10.120.0.133:3306
+	User tfweb
+	HostName 10.10.0.4
+	IdentityFile %d/.ssh/id_amsxf01
+	LocalForward 192.168.33.1:3306 10.120.0.133:3306
 
 Host root.dev.web.tozzini
-  User root
-  HostName 10.10.0.4
-  IdentityFile %d/.ssh/id_amsxf01
+	User root
+	HostName 10.10.0.4
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host dev.intranet.tozzini
-  User root
-  HostName 10.10.0.5
-  IdentityFile %d/.ssh/id_amsxf01
-  ProxyCommand ssh -q dev.web.tozzini -W %h:%p
-  LocalForward 8080 127.0.0.1:80
+	User root
+	HostName 10.10.0.5
+	IdentityFile %d/.ssh/id_amsxf01
+	ProxyCommand ssh -q dev.web.tozzini -W %h:%p
+	LocalForward 8080 127.0.0.1:80
 
 Host prd.systemweb.tozzini
-  User root
-  HostName 10.10.0.68
-  IdentityFile %d/.ssh/id_amsxf01
+	User root
+	HostName 10.10.0.68
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host dev.systemweb.tozzini
-  User root
-  HostName 10.10.0.70
-  IdentityFile %d/.ssh/id_amsxf01
+	User root
+	HostName 10.10.0.70
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host openvpn.tozzini
-  User amix.eea
-  HostName 10.10.0.118
-  IdentityFile %d/.ssh/id_tozzini_bastil1
-  ProxyCommand ssh -q bastil1.tozzini -W %h:%p
+	User amix.eea
+	HostName 10.10.0.118
+	IdentityFile %d/.ssh/id_tozzini_bastil1
+	ProxyCommand ssh -q bastil1.tozzini -W %h:%p
 
 Host bastil1.tozzini
-  User amix.eea
-  HostName 10.10.0.43
-  IdentityFile %d/.ssh/id_amsxf01
+	User amix.eea
+	HostName 10.10.0.43
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host dc.intranet.tozzini
 	User tfweb
 	HostName 172.16.120.103
-  IdentityFile %d/.ssh/id_amsxf01
+	IdentityFile %d/.ssh/id_amsxf01
 	ProxyCommand ssh -q dev.web.tozzini -W %h:%p
 
 # Gol
 Host bastil1.gol
-  HostName 10.4.104.15
-  User amix.eea
-  IdentityFile %d/.ssh/id_amsxf01
+	HostName 10.4.104.15
+	User amix.eea
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host bastil2.gol
-  HostName 10.4.175.15
-  User amix.eea
-  IdentityFile %d/.ssh/id_amsxf01
+	HostName 10.4.175.15
+	User amix.eea
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host bastil3.gol
-  HostName 10.4.175.16
-  User amix.eea
-  IdentityFile %d/.ssh/id_amsxf01
+	HostName 10.4.175.16
+	User amix.eea
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host *.bastil1.gol
-  ProxyCommand ssh -q bastil1.gol -W %h:%p
-  IdentityFile %d/.ssh/id_gol_bastil1
+	ProxyCommand ssh -q bastil1.gol -W %h:%p
+	IdentityFile %d/.ssh/id_gol_bastil1
 
 Host *.bastil2.gol
-  ProxyCommand ssh -q bastil2.gol -W %h:%p
+	ProxyCommand ssh -q bastil2.gol -W %h:%p
 
 Host *.bastil3.gol
-  ProxyCommand ssh -q bastil3.gol -W %h:%p
+	ProxyCommand ssh -q bastil3.gol -W %h:%p
 
 Host zabbix.bastil1.gol zabbix.bastil2.gol zabbix.bastil3.gol
-  User amix.eea
-  HostName 10.4.170.246
+	User amix.eea
+	HostName 10.4.170.246
+
+Host portal.gol
+	User bases
+	HostName 10.4.170.93
+	IdentityFile ~/.ssh/id_amsxf01
 
 Host rootnet.gol
-  User amix.eea
-  HostName 10.4.170.224
-  IdentityFile %d/.ssh/id_gol_bastil1
-  ProxyCommand ssh -q bastil1.gol -W %h:%p
+	User amix.eea
+	HostName 10.4.170.224
+	IdentityFile %d/.ssh/id_gol_bastil1
+	ProxyCommand ssh -q bastil1.gol -W %h:%p
 
 Host portal.bastil1.gol
   User amix.eea
@@ -215,101 +220,101 @@ Host backup.portal.bastil1.gol
   HostName 10.4.255.7
 
 Host rdesktop.gol
-  User amix.eea
-  HostName 10.4.170.246
-  IdentityFile %d/.ssh/id_gol_bastil1
-  ProxyCommand ssh -q bastil1.gol -W %h:%p
-  LocalForward 127.0.0.1:3389 10.4.175.10:3389
+	User amix.eea
+	HostName 10.4.170.246
+	IdentityFile %d/.ssh/id_gol_bastil1
+	ProxyCommand ssh -q bastil1.gol -W %h:%p
+	LocalForward 127.0.0.1:3389 10.4.175.10:3389
 
 # Dasa
 Host zabbix.dasa
-  User root
-  HostName 10.253.14.129
-  IdentityFile %d/.ssh/id_amsxf01
+	User root
+	HostName 10.253.14.129
+	IdentityFile %d/.ssh/id_amsxf01
 
 # Prime
 Host portal.prime portal.prime.amix
-  User centos
-  HostName 52.206.145.35
-  IdentityFile ~/.ssh/prime.pem
+	User centos
+	HostName 52.206.145.35
+	IdentityFile ~/.ssh/prime.pem
 
 # Stam
 Host fw.stam
-  User root
-  HostName 10.0.0.3
-  IdentityFile %d/.ssh/id_amsxf01
+	User root
+	HostName 10.0.0.3
+	IdentityFile %d/.ssh/id_amsxf01
 
 # Jurd
 Host rn.iurd.amix
-  User root
-  HostName 187.9.79.162
+	User root
+	HostName 187.9.79.162
 
 # IESC
 Host zabbix.iesc
-  User root
-  HostName 10.254.0.145
-  IdentityFile %d/.ssh/id_rsa
+	User root
+	HostName 10.254.0.145
+	IdentityFile %d/.ssh/id_amsxf01
 
 # CBA
 Host aceite.ged.cba
-  User root
-  HostName 10.56.4.9
-  IdentityFile %d/.ssh/id_amsxf01
+	User root
+	HostName 10.56.4.9
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host prd.ged.cba
-  User root
-  HostName 10.56.3.20
-  IdentityFile %d/.ssh/id_amsxf01
+	User root
+	HostName 10.56.3.20
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host cloop.somos.amix
-  User root
-  HostName 10.196.7.53
-  ServerAliveInterval 60
-  IdentityFile %d/.ssh/id_amsxf01
+	User root
+	HostName 10.196.7.53
+	ServerAliveInterval 60
+	IdentityFile %d/.ssh/id_amsxf01
 
 Host cuias.cloop.somos
-  User amix
-  HostName 10.195.1.133
-  ServerAliveInterval 60
-  ProxyCommand ssh -q somos.cloop.amix -W %h:%p
-  IdentityFile %d/.ssh/id_amsxf01
+	User amix
+	HostName 10.195.1.133
+	ServerAliveInterval 60
+	ProxyCommand ssh -q somos.cloop.amix -W %h:%p
+	IdentityFile %d/.ssh/id_amsxf01
 
 # Danone
 Host zabbix.danone
-  User root
-  HostName 10.8.1.63
+	User root
+	HostName 10.8.1.63
 
 Host byod.danone.amix
 	User root
 	HostName 172.16.0.1
-  IdentityFile %d/.ssh/id_amsxf01
-  LocalForward 8081 172.16.0.1:81
-  LocalForward 8082 172.16.0.1:82
-  LocalForward 8083 172.16.0.1:83
+	IdentityFile %d/.ssh/id_amsxf01
+	LocalForward 8081 172.16.0.1:81
+	LocalForward 8082 172.16.0.1:82
+	LocalForward 8083 172.16.0.1:83
 
 # LBCA
 Host host1.lbca.amix
-  User opc
-  HostName 129.152.132.219
-  IdentityFile %d/.ssh/id_lbca
-  ServerAliveInterval 60
+	User opc
+	HostName 129.152.132.219
+	IdentityFile %d/.ssh/id_lbca
+	ServerAliveInterval 60
 
 # Sinafresp
 Host dev.wp.sfp.amix
-  User administrator
-  HostName 187.18.54.217
-  IdentityFile %d/.ssh/id_dv_sfp
-  Port 22
+	User administrator
+	HostName 187.18.54.217
+	IdentityFile %d/.ssh/id_dv_sfp
+	Port 22
 
 # GPTW
-Host gptw.aws.amix
-  User richard
-  HostName 54.201.133.78
-  IdentityFile %d/id_rsa
+Host gptw.aws.amix gptw.aws
+	User root
+	HostName 54.201.133.78
+	IdentityFile %d/.ssh/id_rsa
 
 # VPN 10.255.251.10
 Host nginx.gptw.aws.amix
-  User ec2-user
-  #HostName ec2-54-68-65-182.us-west-2.compute.amazonaws.com
-  HostName 10.255.251.10
-  IdentityFile %d/id_rsa
+	User ec2-user
+	#HostName ec2-54-68-65-182.us-west-2.compute.amazonaws.com
+	HostName 10.255.251.10
+	IdentityFile %d/id_rsa
