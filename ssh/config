@@ -255,6 +255,11 @@ Host zabbix.iesc
 	HostName 10.254.0.145
 	IdentityFile %d/.ssh/id_amsxf01
 
+Host rootnet.iesc
+	User root
+	HostName 10.254.0.104
+	IdentityFile %d/.ssh/id_rsa
+
 # CBA
 Host aceite.ged.cba
 	User root
