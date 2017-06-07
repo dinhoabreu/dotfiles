@@ -323,3 +323,9 @@ Host nginx.gptw.aws.amix
 	#HostName ec2-54-68-65-182.us-west-2.compute.amazonaws.com
 	HostName 10.255.251.10
 	IdentityFile %d/id_rsa
+
+# Gafisa
+Host personas.gafisa
+	User root
+	HostName 172.22.0.13
+	IdentityFile %d/id_rsa
