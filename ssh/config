@@ -212,12 +212,12 @@ Host rootnet.gol
 	ProxyCommand ssh -q bastil1.gol -W %h:%p
 
 Host portal.bastil1.gol
-  User amix.eea
-  HostName 10.4.170.93
+	User amix.eea
+	HostName 10.4.170.93
 
 Host backup.portal.bastil1.gol
-  User amix.eea
-  HostName 10.4.255.7
+	User amix.eea
+	HostName 10.4.255.7
 
 Host rdesktop.gol
 	User amix.eea
