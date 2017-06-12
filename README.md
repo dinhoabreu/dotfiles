@@ -154,6 +154,12 @@ and I need to remove the symbolic link `rm ~/.ssh/config`
 [Nerd-fonts](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf) for [vim-devicons](https://github.com/ryanoasis/vim-devicons) plugin.
 Download and configure nerd-fonts into iTerm!
 
+### MacOS defaults
+
+```
+./dotfiles/macos
+```
+
 ## Commands
 
 ### getsrt
