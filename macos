@@ -5,3 +5,8 @@
 defaults write org.gpgtools.gpgmail SignNewEmailsByDefault -int 1
 # change default method to `s/mime`
 defaults write org.gpgtools.gpgmail DefaultSecurityMethod -int 2
+
+# For VS Code
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+# For VS Code Insider
+defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false
