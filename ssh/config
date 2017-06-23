@@ -71,20 +71,36 @@ Host bohler bohler.amix
 	LocalForward 51433 172.16.27.101:1433
 
 # Azul
-Host rn.azul rn.azul.amix
+Host bastil1.azul
+	User amix.eea
+	HostName 10.0.7.8
+	IdentityFile ~/.ssh/id_amsxf01
+	ProxyCommand ssh -q dc01.zabbix.azul -W %h:%p
+
+Host bastil2.azul
+	User amix.eea
+	HostName 10.0.7.9
+	IdentityFile ~/.ssh/id_amsxf01
+	ProxyCommand ssh -q dc01.zabbix.azul -W %h:%p
+
+Host *.bastil1.azul
+	IdentityFile ~/.ssh/id_azul_bastil1
+	ProxyCommand ssh -q bastil1.azul -W %h:%p
+
+Host *.bastil2.azul
+	IdentityFile ~/.ssh/id_azul_bastil2
+	ProxyCommand ssh -q bastil2.azul -W %h:%p
+
+Host rn.bastil1.azul
 	User root
 	HostName 10.0.254.249
-	IdentityFile %d/.ssh/id_amsxf01
 
-Host prod.cloop.azul
+Host prod.cloop.bastil1.azul
 	User amix
 	HostName 10.0.5.110
-	IdentityFile %d/.ssh/id_rsa
 
-Host prod.certdig.azul
-	User amix
+Host prod.certdig.bastil1.azul
 	HostName 10.0.5.168
-	ProxyCommand ssh -q prod.cloop.azul -W %h:%p
 
 Host hom.cloop.azul
 	User amix
@@ -101,10 +117,9 @@ host zabbix.azul
 	Hostname 10.0.100.55
 	IdentityFile ~/.ssh/id_amsxf01
 
-host zabbix2.azul
+host zabbix2.azul zabbix2.bastil1.azul zabbix2.bastil2.azul
 	User amix
 	Hostname 10.0.100.56
-	IdentityFile ~/.ssh/id_amsxf01
 
 host dc01.zabbix.azul
 	User amix
@@ -159,16 +174,29 @@ Host openvpn.tozzini
 	IdentityFile %d/.ssh/id_tozzini_bastil1
 	ProxyCommand ssh -q bastil1.tozzini -W %h:%p
 
-Host bastil1.tozzini
+Host bastil1.tozzini 10.10.0.43
 	User amix.eea
 	HostName 10.10.0.43
 	IdentityFile %d/.ssh/id_amsxf01
+
+Host *.bastil1.tozzini
+	ProxyCommand ssh -q bastil1.tozzini -W %h:%p
 
 Host dc.intranet.tozzini
 	User tfweb
 	HostName 172.16.120.103
 	IdentityFile %d/.ssh/id_amsxf01
 	ProxyCommand ssh -q dev.web.tozzini -W %h:%p
+
+Host dc.api.bastil1.tozzini
+  # Fsclh2#
+	User amix.eea
+	HostName 172.16.120.101
+	IdentityFile %d/.ssh/id_tozzini_bastil1
+	# tests
+	LocalForward 127.0.0.1:3000 172.16.120.101:443
+	# deploy
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 # Gol
 Host bastil1.gol
@@ -199,6 +227,7 @@ Host *.bastil3.gol
 Host zabbix.bastil1.gol zabbix.bastil2.gol zabbix.bastil3.gol
 	User amix.eea
 	HostName 10.4.170.246
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host portal.gol
 	User bases
@@ -322,10 +351,16 @@ Host nginx.gptw.aws.amix
 	User ec2-user
 	#HostName ec2-54-68-65-182.us-west-2.compute.amazonaws.com
 	HostName 10.255.251.10
-	IdentityFile %d/id_rsa
+	IdentityFile %d/.ssh/id_rsa
 
 # Gafisa
 Host personas.gafisa
 	User root
 	HostName 172.22.0.13
-	IdentityFile %d/id_rsa
+	IdentityFile %d/.ssh/id_rsa
+
+# Conectar
+Host db.conectcar
+	User root
+	HostName 10.202.11.62
+	IdentityFile %d/.ssh/id_rsa
