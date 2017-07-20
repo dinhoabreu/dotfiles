@@ -139,6 +139,10 @@ Host 10.255.253.* hosts.cdf
 	#LocalForward 9082 10.190.56.1:9082
 	#LocalForward 9083 10.190.56.1:9083
 
+Host zabbix.cdf
+	User root
+	HostName 10.250.112.120
+
 # Tozzini
 Host dev.web.tozzini
 	User tfweb
@@ -171,6 +175,12 @@ Host dev.systemweb.tozzini
 Host openvpn.tozzini
 	User amix.eea
 	HostName 10.10.0.118
+	IdentityFile %d/.ssh/id_tozzini_bastil1
+	ProxyCommand ssh -q bastil1.tozzini -W %h:%p
+
+Host zabbix.tozzini
+	User amix.eea
+	HostName 10.10.0.136
 	IdentityFile %d/.ssh/id_tozzini_bastil1
 	ProxyCommand ssh -q bastil1.tozzini -W %h:%p
 
@@ -312,6 +322,11 @@ Host cuias.cloop.somos
 	ServerAliveInterval 60
 	ProxyCommand ssh -q somos.cloop.amix -W %h:%p
 	IdentityFile %d/.ssh/id_amsxf01
+
+Host zabbix.cba
+	User root
+	HostName 10.2.24.11
+	IdentityFile %d/.ssh/id_rsa
 
 # Danone
 Host zabbix.danone
