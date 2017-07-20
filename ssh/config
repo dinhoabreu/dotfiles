@@ -71,35 +71,35 @@ Host bohler bohler.amix
 	LocalForward 51433 172.16.27.101:1433
 
 # Azul
-Host bastil1.azul
+Host bastion1.azul
 	User amix.eea
 	HostName 10.0.7.8
 	IdentityFile ~/.ssh/id_amsxf01
 	ProxyCommand ssh -q dc01.zabbix.azul -W %h:%p
 
-Host bastil2.azul
+Host bastion2.azul
 	User amix.eea
 	HostName 10.0.7.9
 	IdentityFile ~/.ssh/id_amsxf01
 	ProxyCommand ssh -q dc01.zabbix.azul -W %h:%p
 
-Host *.bastil1.azul
-	IdentityFile ~/.ssh/id_azul_bastil1
-	ProxyCommand ssh -q bastil1.azul -W %h:%p
+Host *.bastion1.azul
+	IdentityFile ~/.ssh/id_azul_bastion1
+	ProxyCommand ssh -q bastion1.azul -W %h:%p
 
-Host *.bastil2.azul
-	IdentityFile ~/.ssh/id_azul_bastil2
-	ProxyCommand ssh -q bastil2.azul -W %h:%p
+Host *.bastion2.azul
+	IdentityFile ~/.ssh/id_azul_bastion2
+	ProxyCommand ssh -q bastion2.azul -W %h:%p
 
-Host rn.bastil1.azul
+Host rn.bastion1.azul
 	User root
 	HostName 10.0.254.249
 
-Host prod.cloop.bastil1.azul
+Host prod.cloop.bastion1.azul
 	User amix
 	HostName 10.0.5.110
 
-Host prod.certdig.bastil1.azul
+Host prod.certdig.bastion1.azul
 	HostName 10.0.5.168
 
 Host hom.cloop.azul
@@ -117,7 +117,7 @@ host zabbix.azul
 	Hostname 10.0.100.55
 	IdentityFile ~/.ssh/id_amsxf01
 
-host zabbix2.azul zabbix2.bastil1.azul zabbix2.bastil2.azul
+host zabbix2.azul zabbix2.bastion1.azul zabbix2.bastion2.azul
 	User amix
 	Hostname 10.0.100.56
 
@@ -175,22 +175,22 @@ Host dev.systemweb.tozzini
 Host openvpn.tozzini
 	User amix.eea
 	HostName 10.10.0.118
-	IdentityFile %d/.ssh/id_tozzini_bastil1
-	ProxyCommand ssh -q bastil1.tozzini -W %h:%p
+	IdentityFile %d/.ssh/id_tozzini_bastion1
+	ProxyCommand ssh -q bastion1.tozzini -W %h:%p
 
 Host zabbix.tozzini
 	User amix.eea
 	HostName 10.10.0.136
-	IdentityFile %d/.ssh/id_tozzini_bastil1
-	ProxyCommand ssh -q bastil1.tozzini -W %h:%p
+	IdentityFile %d/.ssh/id_tozzini_bastion1
+	ProxyCommand ssh -q bastion1.tozzini -W %h:%p
 
-Host bastil1.tozzini 10.10.0.43
+Host bastion1.tozzini 10.10.0.43
 	User amix.eea
 	HostName 10.10.0.43
 	IdentityFile %d/.ssh/id_amsxf01
 
-Host *.bastil1.tozzini
-	ProxyCommand ssh -q bastil1.tozzini -W %h:%p
+Host *.bastion1.tozzini
+	ProxyCommand ssh -q bastion1.tozzini -W %h:%p
 
 Host dc.intranet.tozzini
 	User tfweb
@@ -198,43 +198,43 @@ Host dc.intranet.tozzini
 	IdentityFile %d/.ssh/id_amsxf01
 	ProxyCommand ssh -q dev.web.tozzini -W %h:%p
 
-Host dc.api.bastil1.tozzini
+Host dc.api.bastion1.tozzini
   # Fsclh2#
 	User amix.eea
 	HostName 172.16.120.101
-	IdentityFile %d/.ssh/id_tozzini_bastil1
+	IdentityFile %d/.ssh/id_tozzini_bastion1
 	# tests
 	LocalForward 127.0.0.1:3000 172.16.120.101:443
 	# deploy
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 # Gol
-Host bastil1.gol
+Host bastion1.gol
 	HostName 10.4.104.15
 	User amix.eea
 	IdentityFile %d/.ssh/id_amsxf01
 
-Host bastil2.gol
+Host bastion2.gol
 	HostName 10.4.175.15
 	User amix.eea
 	IdentityFile %d/.ssh/id_amsxf01
 
-Host bastil3.gol
+Host bastion3.gol
 	HostName 10.4.175.16
 	User amix.eea
 	IdentityFile %d/.ssh/id_amsxf01
 
-Host *.bastil1.gol
-	ProxyCommand ssh -q bastil1.gol -W %h:%p
-	IdentityFile %d/.ssh/id_gol_bastil1
+Host *.bastion1.gol
+	ProxyCommand ssh -q bastion1.gol -W %h:%p
+	IdentityFile %d/.ssh/id_gol_bastion1
 
-Host *.bastil2.gol
-	ProxyCommand ssh -q bastil2.gol -W %h:%p
+Host *.bastion2.gol
+	ProxyCommand ssh -q bastion2.gol -W %h:%p
 
-Host *.bastil3.gol
-	ProxyCommand ssh -q bastil3.gol -W %h:%p
+Host *.bastion3.gol
+	ProxyCommand ssh -q bastion3.gol -W %h:%p
 
-Host zabbix.bastil1.gol zabbix.bastil2.gol zabbix.bastil3.gol
+Host zabbix.bastion1.gol zabbix.bastion2.gol zabbix.bastion3.gol
 	User amix.eea
 	HostName 10.4.170.246
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
@@ -247,22 +247,22 @@ Host portal.gol
 Host rootnet.gol
 	User amix.eea
 	HostName 10.4.170.224
-	IdentityFile %d/.ssh/id_gol_bastil1
-	ProxyCommand ssh -q bastil1.gol -W %h:%p
+	IdentityFile %d/.ssh/id_gol_bastion1
+	ProxyCommand ssh -q bastion1.gol -W %h:%p
 
-Host portal.bastil1.gol
+Host portal.bastion1.gol
 	User amix.eea
 	HostName 10.4.170.93
 
-Host backup.portal.bastil1.gol
+Host backup.portal.bastion1.gol
 	User amix.eea
 	HostName 10.4.255.7
 
 Host rdesktop.gol
 	User amix.eea
 	HostName 10.4.170.246
-	IdentityFile %d/.ssh/id_gol_bastil1
-	ProxyCommand ssh -q bastil1.gol -W %h:%p
+	IdentityFile %d/.ssh/id_gol_bastion1
+	ProxyCommand ssh -q bastion1.gol -W %h:%p
 	LocalForward 127.0.0.1:3389 10.4.175.10:3389
 
 # Dasa
