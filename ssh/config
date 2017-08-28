@@ -379,7 +379,12 @@ Host personas.gafisa
 	IdentityFile %d/.ssh/id_rsa
 
 # Conectar
-Host zabbix.conectcar
+Host db.conectcar zabbix.conectcar
 	User root
 	HostName 10.202.11.62
 	IdentityFile %d/.ssh/id_rsa
+
+# Alef
+Host alef
+  User amix.eea
+  HostName 10.255.200.1
