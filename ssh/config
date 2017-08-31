@@ -19,9 +19,20 @@ Host amsxf01
 	User edison
 	HostName 10.255.1.1
 
+# Moema
 Host bastion1.amix
 	User amix.eea
 	HostName 10.255.1.20
+
+# Amazon sa-east-1 (São Paulo)
+Host bastion2.amix
+	User amix.eea
+	HostName 10.255.17.20
+
+# Amazon us-east-1 (N. Virginia)
+Host bastion3.amix
+	User amix.eea
+	HostName 10.255.33.20
 
 Host *.amix
 	ProxyCommand ssh -q amsxf01 -W %h:%p
