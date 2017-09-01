@@ -24,6 +24,11 @@ Host bastion1.amix
 	User amix.eea
 	HostName 10.255.1.20
 
+Host *.bastion1.amix
+	User amix.eea
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+	IdentityFile %d/.ssh/id_amix_bastion1
+
 # Amazon sa-east-1 (São Paulo)
 Host bastion2.amix
 	User amix.eea
@@ -214,7 +219,7 @@ Host dc.intranet.tozzini
 	ProxyCommand ssh -q dev.web.tozzini -W %h:%p
 
 Host dc.api.bastion1.tozzini
-  # Fsclh2#
+	# Fsclh2#
 	User amix.eea
 	HostName 172.16.120.101
 	IdentityFile %d/.ssh/id_tozzini_bastion1
@@ -392,10 +397,10 @@ Host personas.gafisa
 # Conectar
 Host db.conectcar zabbix.conectcar
 	User root
-	HostName 10.202.11.62
+	#HostName 10.202.11.62
+	HostName 10.255.249.2
 	IdentityFile %d/.ssh/id_rsa
 
 # Alef
-Host alef
-  User amix.eea
-  HostName 10.255.200.1
+Host alef.bastion1.amix
+	HostName 10.255.200.1
