@@ -153,6 +153,12 @@ host dc01.zabbix.azul
 	IdentityFile ~/.ssh/id_amsxf01
 	ProxyCommand ssh -q zabbix.azul -W %h:%p
 
+host grafana.bastion1.azul
+	User amix.eea
+	Hostname 10.0.254.227
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+	LocalForward 9001 127.0.0.1:3000
+
 # CDF
 Host 10.255.253.* hosts.cdf
 	User root
@@ -392,6 +398,11 @@ Host nginx.gptw.aws.amix
 	User ec2-user
 	#HostName ec2-54-68-65-182.us-west-2.compute.amazonaws.com
 	HostName 10.255.251.10
+	IdentityFile %d/.ssh/id_rsa
+
+Host w01.spo.gptw.aws.amix
+	User centos
+	HostName 52.67.98.1
 	IdentityFile %d/.ssh/id_rsa
 
 # Gafisa
