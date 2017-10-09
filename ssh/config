@@ -144,7 +144,7 @@ host zabbix.azul
 	IdentityFile ~/.ssh/id_amsxf01
 
 host zabbix2.azul zabbix2.bastion1.azul zabbix2.bastion2.azul
-	User amix
+	User amix.eea
 	Hostname 10.0.100.56
 
 host dc01.zabbix.azul
