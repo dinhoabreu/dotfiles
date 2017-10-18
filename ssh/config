@@ -101,7 +101,6 @@ Host bastion1.azul
 	User amix.eea
 	HostName 10.0.7.8
 	IdentityFile ~/.ssh/id_amsxf01
-	ProxyCommand ssh -q dc01.zabbix.azul -W %h:%p
 
 Host bastion2.azul
 	User amix.eea
@@ -110,54 +109,48 @@ Host bastion2.azul
 	ProxyCommand ssh -q dc01.zabbix.azul -W %h:%p
 
 Host *.bastion1.azul
+	User amix.eea
 	IdentityFile ~/.ssh/id_azul_bastion1
 	ProxyCommand ssh -q bastion1.azul -W %h:%p
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host *.bastion2.azul
+	User amix.eea
 	IdentityFile ~/.ssh/id_azul_bastion2
 	ProxyCommand ssh -q bastion2.azul -W %h:%p
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
-Host rn.bastion1.azul
-	User root
+Host rn.bastion*.azul
 	HostName 10.0.254.249
 
-Host prod.cloop.bastion1.azul
-	User amix.eea
+Host cloop.bastion*.azul
+	User amix
 	HostName 10.0.5.110
 
-Host prod.certdig.bastion1.azul
-	HostName 10.0.5.168
-
-Host hom.cloop.azul
+Host hom.cloop.bastion*.azul
 	User amix
 	HostName 10.0.10.110
-	IdentityFile %d/.ssh/id_rsa
 
-Host hom.certdig.azul
-	User amix
+Host certdig.bastion*.azul
+	HostName 10.0.5.168
+
+Host hom.certdig.bastion*.azul
 	HostName 10.0.10.168
-	ProxyCommand ssh -q hom.cloop.azul -W %h:%p
 
-host zabbix.azul
-	User amix
+host zabbix.bastion*.azul
 	Hostname 10.0.100.55
-	IdentityFile ~/.ssh/id_amsxf01
 
-host zabbix2.azul zabbix2.bastion1.azul zabbix2.bastion2.azul
-	User amix.eea
+host zabbix2.bastion*.azul
 	Hostname 10.0.100.56
 
-host dc01.zabbix.azul
-	User amix
+host dc01.bastion*.azul
 	Hostname 10.0.254.240
-	IdentityFile ~/.ssh/id_amsxf01
-	ProxyCommand ssh -q zabbix.azul -W %h:%p
 
-host grafana.bastion1.azul
-	User amix.eea
+host grafana.bastion*.azul
 	Hostname 10.0.254.227
-	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
-	LocalForward 9001 127.0.0.1:3000
+
+host hom.grafana.bastion*.azul
+	Hostname 10.0.254.228
 
 # CDF
 Host 10.255.253.* hosts.cdf
