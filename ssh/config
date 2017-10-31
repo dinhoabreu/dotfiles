@@ -106,7 +106,6 @@ Host bastion2.azul
 	User amix.eea
 	HostName 10.0.7.9
 	IdentityFile ~/.ssh/id_amsxf01
-	ProxyCommand ssh -q dc01.zabbix.azul -W %h:%p
 
 Host *.bastion1.azul
 	User amix.eea
