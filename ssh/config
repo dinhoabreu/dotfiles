@@ -142,6 +142,9 @@ host zabbix.bastion*.azul
 host zabbix2.bastion*.azul
 	Hostname 10.0.100.56
 
+host zabbix3.bastion*.azul
+	Hostname 10.169.2.25
+
 host dc01.bastion*.azul
 	Hostname 10.0.254.240
 
@@ -413,3 +416,7 @@ Host db.conectcar zabbix.conectcar
 # Alef
 Host alef.bastion1.amix
 	HostName 10.255.200.1
+
+# C&C
+Host cc.bastion1.amix
+	HostName 10.1.9.67
