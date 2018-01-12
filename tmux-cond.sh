@@ -20,8 +20,19 @@ tmux_version_gte() {
 	(((100 * tmux_major + tmux_minor) >= (100 * ref_major + ref_minor)))
 }
 
+## Add vi selections
+enable-vi-selections() {
+	if tmux -V | tmux_version_gte 2.6; then
+    tmux set bind-key -Tcopy-mode-vi 'v' send -X begin-selection
+    tmux set bind-key -Tcopy-mode-vi 'y' send -X copy-selection
+  else
+    tmux set bind -t vi-copy 'v' begin-selection
+    tmux set bind -t vi-copy 'y' copy-selection
+  fi
+}
+
 ## Enable mouse control (clickable windows, panes, resizable panes)
-main() {
+enable-mouse() {
 	if tmux -V | tmux_version_gte 2.1; then
 		tmux set -g mouse on
 	else
@@ -30,6 +41,11 @@ main() {
 		tmux set -g mouse-select-pane on
 		tmux set -g mouse-resize-pane on
 	fi
+}
+
+main() {
+  enable-vi-selections
+  enable-mouse
 }
 
 main

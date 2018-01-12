@@ -97,6 +97,16 @@ Edit your `.tmux.conf`
 source-file ~/dotfiles/tmux.conf
 ```
 
+#### VS Code
+
+[Persistent terminal sessions in VS Code](https://medium.com/@joaomoreno/persistent-terminal-sessions-in-vs-code-8fc469ed6b41)
+
+In VS Code`s User Settings change:
+
+```
+"terminal.integrated.shell.osx": "code-shell"
+```
+
 ### Vim - config
 
 Link .vim and .vimrc to `$HOME`
