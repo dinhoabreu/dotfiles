@@ -22,12 +22,30 @@ tmux_version_gte() {
 
 ## Add vi selections
 enable-vi-selections() {
+
+  local r24e_exists=1 pbcopy_exists=1
+  if cmd-exists reattach-to-user-namespace; then
+    r24e_exists=0
+  fi
+  if cmd-exists pbcopy; then
+    pbcopy_exists=0
+  fi
 	if tmux -V | tmux_version_gte 2.6; then
-    tmux set bind-key -Tcopy-mode-vi 'v' send -X begin-selection
-    tmux set bind-key -Tcopy-mode-vi 'y' send -X copy-selection
+    tmux bind -T copy-mode-vi 'v' send -X begin-selection
+    tmux bind -T copy-mode-vi 'y' send -X copy-selection
+    if [[ $r24e_exists -eq 0 && $pbcopy_exists -eq 0 ]]; then
+      tmux bind -T copy-mode-vi 'y' send -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'
+      tmux unbind -T copy-mode-vi Enter
+      tmux bind -T copy-mode-vi Enter send -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'
+    fi
   else
-    tmux set bind -t vi-copy 'v' begin-selection
-    tmux set bind -t vi-copy 'y' copy-selection
+    tmux bind -t vi-copy 'v' begin-selection
+    tmux bind -t vi-copy 'y' copy-selection
+    if [[ $r24e_exists -eq 0 && $pbcopy_exists -eq 0 ]]; then
+      tmux bind -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+      tmux unbind -t vi-copy Enter
+      tmux bind -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+    fi
   fi
 }
 
@@ -41,6 +59,10 @@ enable-mouse() {
 		tmux set -g mouse-select-pane on
 		tmux set -g mouse-resize-pane on
 	fi
+}
+
+cmd-exists() {
+  command -v "$1" >/dev/null
 }
 
 main() {

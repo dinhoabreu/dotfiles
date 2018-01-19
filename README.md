@@ -91,6 +91,12 @@ git dsf # dsf is a git-alias for diff-so-fancy
 
 ### Tmux - config
 
+[Copy & Paste on OS X: A Better Future](https://robots.thoughtbot.com/tmux-copy-paste-on-os-x-a-better-future)
+
+```
+brew install reattach-to-user-namespace
+```
+
 Edit your `.tmux.conf`
 
 ```bash
