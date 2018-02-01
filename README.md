@@ -103,6 +103,12 @@ Edit your `.tmux.conf`
 source-file ~/dotfiles/tmux.conf
 ```
 
+Install [tmux-better-mouse-mode](https://github.com/NHDaly/tmux-better-mouse-mode)
+
+```bash
+git clone https://github.com/nhdaly/tmux-better-mouse-mode ~/dotfiles/tmux-plugins/tmux-better-mouse-mode
+```
+
 #### VS Code
 
 [Persistent terminal sessions in VS Code](https://medium.com/@joaomoreno/persistent-terminal-sessions-in-vs-code-8fc469ed6b41)
