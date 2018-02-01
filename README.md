@@ -126,7 +126,7 @@ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 vim --noplugin -u ~/.vim/vundles.vim -N "+set hidden" "+syntax on" +BundleClean +BundleInstall +qall
 ```
 
-To add spell brasilian portuguese language, download 
+To add spell brasilian portuguese language, download
 [pt_BR dictionary](http://downloads.sourceforge.net/project/aoo-extensions/1375/8/vero_pt_br_v208aoc.oxt?r=http%3A%2F%2Fextensions.openoffice.org%2Fen%2Fproject%2Fvero-brazilian-portuguese-spellchecking-dictionary-hyphenator&ts=1477079390&use_mirror=ufpr)
 and rename file to `vero_pt_br_v208aoc.oxt.zip`.
 
@@ -174,6 +174,15 @@ Download and configure nerd-fonts into iTerm!
 
 ```
 ./dotfiles/macos
+```
+
+### GPG OSX
+
+[Reference](https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0)
+
+```
+git config --global gpg.program gpg1
+brew install gpg1
 ```
 
 ## Commands
