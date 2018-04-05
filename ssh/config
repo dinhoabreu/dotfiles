@@ -150,9 +150,11 @@ host dc01.bastion*.azul
 
 host grafana.bastion*.azul
 	Hostname 10.0.254.227
+	LocalForward 4080 10.0.254.227:3000
 
 host hom.grafana.bastion*.azul
 	Hostname 10.0.254.228
+	LocalForward 4090 10.0.254.228:3000
 
 # CDF
 Host 10.255.253.* hosts.cdf
@@ -391,7 +393,7 @@ Host gptw.aws.amix gptw.aws
 # VPN 10.255.251.10
 Host nginx.gptw.aws.amix
 	User ec2-user
-	#HostName ec2-54-68-65-182.us-west-2.compute.amazonaws.com
+	# HostName ec2-54-68-65-182.us-west-2.compute.amazonaws.com
 	HostName 10.255.251.10
 	IdentityFile %d/.ssh/id_rsa
 
