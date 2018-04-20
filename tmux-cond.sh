@@ -61,6 +61,27 @@ enable-mouse() {
 	fi
 }
 
+## Enable copy integration with clipboard
+enable-copy-clipboard() {
+
+  local r24e_exists=1 pbcopy_exists=1
+  if cmd-exists reattach-to-user-namespace; then
+    r24e_exists=0
+  fi
+  if cmd-exists pbcopy; then
+    pbcopy_exists=0
+  fi
+	if tmux -V | tmux_version_gte 2.6; then
+    if [[ $r24e_exists -eq 0 && $pbcopy_exists -eq 0 ]]; then
+      tmux bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'
+    fi
+  else
+    if [[ $r24e_exists -eq 0 && $pbcopy_exists -eq 0 ]]; then
+      tmux bind -t vi-copy MouseDragEnd1Pane copy-pipe "reattach-to-user-namespace pbcopy"
+    fi
+  fi
+}
+
 cmd-exists() {
   command -v "$1" >/dev/null
 }
@@ -68,6 +89,7 @@ cmd-exists() {
 main() {
   enable-vi-selections
   enable-mouse
+  enable-copy-clipboard
 }
 
 main
