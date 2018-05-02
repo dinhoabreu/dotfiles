@@ -55,6 +55,12 @@ Host amsxp02
 	HostName amsxp02
 	IdentityFile %d/.ssh/id_rsa
 
+Host mpro01.amix
+	User edison
+	HostName home.twdnet.com.br
+	Port 8322
+	IdentityFile %d/.ssh/id_rsa
+
 Host rootspot.amix
 	User root
 	HostName 10.255.20.9
@@ -213,13 +219,21 @@ Host zabbix.tozzini
 	IdentityFile %d/.ssh/id_tozzini_bastion1
 	ProxyCommand ssh -q bastion1.tozzini -W %h:%p
 
-Host bastion1.tozzini 10.10.0.43
+Host blgs018 bastion1.tozzini 10.10.0.43
 	User amix.eea
 	HostName 10.10.0.43
 	IdentityFile %d/.ssh/id_amsxf01
 
+Host dccs028 bastion2.tozzini 10.120.0.143
+	User amix.eea
+	HostName 10.120.0.143
+	IdentityFile %d/.ssh/id_amsxf01
+
 Host *.bastion1.tozzini
 	ProxyCommand ssh -q bastion1.tozzini -W %h:%p
+
+Host *.bastion2.tozzini
+	ProxyCommand ssh -q bastion2.tozzini -W %h:%p
 
 Host dc.intranet.tozzini
 	User tfweb
@@ -256,6 +270,7 @@ Host bastion3.gol
 Host *.bastion1.gol
 	ProxyCommand ssh -q bastion1.gol -W %h:%p
 	IdentityFile %d/.ssh/id_gol_bastion1
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host *.bastion2.gol
 	ProxyCommand ssh -q bastion2.gol -W %h:%p
@@ -354,7 +369,7 @@ Host cuias.cloop.somos
 
 Host zabbix.cba
 	User root
-	HostName 10.2.24.11
+	HostName 10.107.0.100
 	IdentityFile %d/.ssh/id_rsa
 
 # Danone
@@ -401,6 +416,10 @@ Host w01.spo.gptw.aws.amix
 	User centos
 	HostName 52.67.98.1
 	IdentityFile %d/.ssh/id_rsa
+
+Host lb01.bastion1.amix
+	HostName 10.55.160.100
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 # Gafisa
 Host personas.gafisa
