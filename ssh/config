@@ -421,6 +421,9 @@ Host lb01.bastion1.amix
 	HostName 10.55.160.100
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
+Host h01.bastion1.amix
+	HostName 10.55.168.41
+
 # Gafisa
 Host personas.gafisa
 	User root
