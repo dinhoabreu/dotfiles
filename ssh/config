@@ -19,6 +19,10 @@ Host amsxf01
 	User edison
 	HostName 10.255.1.1
 
+Host 10.255.1.34
+	User root
+	ProxyCommand ssh -q amsxf01 -W %h:%p
+
 # Moema
 Host bastion1.amix
 	User amix.eea
@@ -80,9 +84,13 @@ Host tunnel-bitbucket.org
 	IdentityFile %d/.ssh/id_rsa
 	ProxyCommand ssh -q amsxf01 -W %h:%p
 
-Host flavia
+Host dev02 lucas
 	User amix
-	HostName 10.255.1.164
+	HostName dev02.spo.oxxys.lan
+
+Host dev03 flavia
+	User amix
+	HostName dev03.spo.oxxys.lan
 
 Host alan
 	User alan
@@ -150,6 +158,10 @@ host zabbix2.bastion*.azul
 
 host zabbix3.bastion*.azul
 	Hostname 10.169.2.25
+
+# Minneapolis
+host zabbix4.bastion*.azul
+	Hostname 10.208.138.26
 
 host dc01.bastion*.azul
 	Hostname 10.0.254.240
@@ -281,6 +293,11 @@ Host *.bastion3.gol
 Host zabbix.bastion1.gol zabbix.bastion2.gol zabbix.bastion3.gol
 	User amix.eea
 	HostName 10.4.170.246
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+
+Host cloop.bastion1.gol cloop.bastion2.gol cloop.bastion3.gol
+	User amix.eea
+	HostName 10.255.1.31
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host portal.gol
