@@ -453,6 +453,12 @@ Host db.conectcar zabbix.conectcar
 	#HostName 10.202.11.62
 	HostName 10.255.249.2
 	IdentityFile %d/.ssh/id_rsa
+	
+Host proxy.zabbix.conectcar
+	User root
+	HostName 10.143.16.30
+	IdentityFile %d/.ssh/id_rsa
+	RemoteForward 127.0.0.1:8080 10.255.1.1:8080
 
 # Alef
 Host alef.bastion1.amix
@@ -461,3 +467,7 @@ Host alef.bastion1.amix
 # C&C
 Host cc.bastion1.amix
 	HostName 10.1.9.67
+
+Host zabbix.cc
+	User root
+	HostName 10.1.9.68
