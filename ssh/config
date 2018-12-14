@@ -43,12 +43,6 @@ Host *.bastion1.amix
 	ProxyCommand ssh -q bastion1.amix -W %h:%p
 	IdentityFile %d/.ssh/id_amix_bastion1
 
-Host *.amix
-	ProxyCommand ssh -q amsxf01 -W %h:%p
-
-Host amsx*
-	ForwardAgent yes
-
 Host amsxd09 gitlab.oxxys.lan
 	User root
 	HostName 10.255.1.49
@@ -214,10 +208,28 @@ Host prd.systemweb.tozzini
 	HostName 10.10.0.68
 	IdentityFile %d/.ssh/id_amsxf01
 
-Host dev.systemweb.tozzini
+Host dev-old.systemweb.tozzini
 	User root
 	HostName 10.10.0.70
 	IdentityFile %d/.ssh/id_amsxf01
+
+# correspondentes acpcliente
+Host hom.systemweb.bastion1.tozzini
+	User amix.eea
+	HostName 10.120.0.146
+	IdentityFile %d/.ssh/id_tozzini_bastion1
+
+# front-end acpcliente
+Host prd.systemweb.bastion1.tozzini
+	User amix.eea
+	HostName 172.16.120.141
+	IdentityFile %d/.ssh/id_tozzini_bastion1
+
+# back-end acpcliente
+Host prd.api.bastion1.tozzini
+	User amix.eea
+	HostName 172.16.120.131
+	IdentityFile %d/.ssh/id_tozzini_bastion1
 
 Host openvpn.tozzini
 	User amix.eea
@@ -243,6 +255,7 @@ Host dccs028 bastion2.tozzini 10.120.0.143
 
 Host *.bastion1.tozzini
 	ProxyCommand ssh -q bastion1.tozzini -W %h:%p
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host *.bastion2.tozzini
 	ProxyCommand ssh -q bastion2.tozzini -W %h:%p
@@ -453,12 +466,15 @@ Host db.conectcar zabbix.conectcar
 	#HostName 10.202.11.62
 	HostName 10.255.249.2
 	IdentityFile %d/.ssh/id_rsa
-	
-Host proxy.zabbix.conectcar
-	User root
-	HostName 10.143.16.30
-	IdentityFile %d/.ssh/id_rsa
-	RemoteForward 127.0.0.1:8080 10.255.1.1:8080
+
+Host bastion1.conectcar
+	User usr.amixadm
+	HostName 10.202.11.131
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+
+Host azr-lx-gra-001
+	User conectcar
+	HostName azr-lx-gra-001
 
 # Alef
 Host alef.bastion1.amix
@@ -467,7 +483,5 @@ Host alef.bastion1.amix
 # C&C
 Host cc.bastion1.amix
 	HostName 10.1.9.67
-
-Host zabbix.cc
-	User root
-	HostName 10.1.9.68
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+	LocalForward 10.255.5.192:9001 10.1.9.110:443
