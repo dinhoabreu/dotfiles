@@ -308,6 +308,11 @@ Host zabbix.bastion1.gol zabbix.bastion2.gol zabbix.bastion3.gol
 	HostName 10.4.170.246
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
+Host zabbix2.bastion1.gol zabbix2.bastion2.gol zabbix2.bastion3.gol
+	User amix.eea
+	HostName 10.4.171.11
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+
 Host cloop.bastion1.gol cloop.bastion2.gol cloop.bastion3.gol
 	User amix.eea
 	HostName 10.255.1.31
