@@ -31,6 +31,7 @@
     mylog = log --pretty=format:'%h %s [%an]' --graph
     grp = grep --break --heading --line-number
     dsf = "!git diff --color $@ | diff-so-fancy"
+    branch-prune = "!git fetch --prune && git branch -vv | cut -c 3- | awk '/gone/{print $1}' | xargs git branch -D"
 [grep]
     extendRegexp = true
     lineNumber = true
