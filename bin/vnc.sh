@@ -4,7 +4,8 @@ tunnel_pid() {
 }
 
 tunnel() {
-	ssh -fNL 5901:127.0.0.1:5900 ikong
+	local host=$1
+	ssh -fNL 5901:127.0.0.1:5900 "$host"
 }
 
 openvnc_established() {
@@ -17,11 +18,16 @@ openvnc() {
 
 main() {
 
-	local pid interval=${1:-3}
+	local pid host=$1 interval=${2:-3}
+
+	if [[ $# < 1 ]]; then
+		echo "Usage: $0 host [interval]" >&2
+		return 1
+	fi
 
 	pid=$(tunnel_pid)
 	if [[ $? -ne 0 ]]; then
-		if ! tunnel; then
+		if ! tunnel "$host"; then
 			echo 'Open SSH Tunnel failed' >&2
 			return 1
 		fi
