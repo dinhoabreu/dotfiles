@@ -11,8 +11,8 @@ Host ubuntu01
 	HostName 192.168.10.15
 	IdentityFile %d/.ssh/id_rsa
 
-Host mpro01
-	HostName 10.255.1.123
+Host storm
+	HostName 10.255.5.192
 
 # AMIX
 Host amsxf01
@@ -72,11 +72,11 @@ Host psql.amsxp03
 	HostName 10.255.1.23
 	IdentityFile %d/.ssh/id_amsxf01
 
-Host tunnel-bitbucket.org
+Host tunnel-bitbucket.org bitbucket.org
 	User git
 	HostName bitbucket.org
 	IdentityFile %d/.ssh/id_rsa
-	ProxyCommand ssh -q amsxf01 -W %h:%p
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
 
 Host dev02 lucas
 	User amix
@@ -84,7 +84,7 @@ Host dev02 lucas
 
 Host dev03 flavia
 	User amix
-	HostName dev03.spo.oxxys.lan
+	HostName 10.255.5.173
 
 Host alan
 	User alan
@@ -94,6 +94,12 @@ Host alan
 Host amzbrxp03.bastion1.amix
 	User amix.eea
 	HostName 10.255.18.23
+	IdentityFile %d/.ssh/id_amix_bastion1
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+
+Host nginx-amadeus.bastion1.amix
+	User amix.eea
+	HostName 10.255.16.200
 	IdentityFile %d/.ssh/id_amix_bastion1
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
@@ -329,13 +335,20 @@ Host rootnet.gol
 	IdentityFile %d/.ssh/id_gol_bastion1
 	ProxyCommand ssh -q bastion1.gol -W %h:%p
 
-Host portal.bastion1.gol
+# Produção
+Host despacho1.bastion1.gol
 	User amix.eea
 	HostName 10.4.170.93
 
-Host backup.portal.bastion1.gol
+# Contingência
+Host despacho2.bastion1.gol
 	User amix.eea
 	HostName 10.4.255.7
+
+# Homologação
+Host despacho-hom.bastion1.gol
+	User amix.eea
+	HostName 10.4.255.107
 
 Host rdesktop.gol
 	User amix.eea
@@ -490,3 +503,25 @@ Host cc.bastion1.amix
 	HostName 10.1.9.67
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 	LocalForward 10.255.5.192:9001 10.1.9.110:443
+
+# Sura
+Host grafana.sura ORAPR1 10.140.227.121
+	User root
+	Hostname 10.140.227.121
+	LocalForward 0.0.0.0:1521 10.140.228.201:1521
+	LocalForward 0.0.0.0:3001 127.0.0.1:3000
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+
+Host rq.sura 10.140.227.122
+	User root
+	HostName 10.140.227.122
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+	LocalForward 0.0.0.0:3001 127.0.0.1:3000
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+
+# Nagumo
+Host rn.nagumo 10.255.207.1
+	User root
+	HostName 10.255.207.1
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
