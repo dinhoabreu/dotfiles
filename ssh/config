@@ -26,7 +26,7 @@ Host 10.255.1.34
 # Moema
 Host bastion1.amix
 	User amix.eea
-	HostName 10.255.1.20
+	HostName 10.255.5.20
 
 # Amazon sa-east-1 (São Paulo)
 Host bastion2.amix
@@ -42,6 +42,14 @@ Host *.bastion1.amix
 	User amix.eea
 	ProxyCommand ssh -q bastion1.amix -W %h:%p
 	IdentityFile %d/.ssh/id_amix_bastion1
+
+Host siga.bastion1.amix amzbrxp02
+	HostName 10.255.18.22
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+
+# Command: Psql
+Host pg.erp.bastion1.amix amsxbl01
+	HostName 10.255.19.22
 
 Host amsxd09 gitlab.oxxys.lan
 	User root
@@ -324,6 +332,12 @@ Host cloop.bastion1.gol cloop.bastion2.gol cloop.bastion3.gol
 	HostName 10.255.1.31
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
+Host captive-portal.bastion1.gol
+	User amix.eea
+	HostName 10.4.1.13
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+	LocalForward 127.0.0.1:3000 192.168.2.1:80
+
 Host portal.gol
 	User bases
 	HostName 10.4.170.93
@@ -495,14 +509,20 @@ Host azr-lx-gra-001
 	HostName azr-lx-gra-001
 
 # Alef
-Host alef.bastion1.amix
+Host alef.bastion1.amix 10.255.200.1
 	HostName 10.255.200.1
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+	LocalForward 127.0.0.1:3000 127.0.0.1:3000
 
 # C&C
 Host cc.bastion1.amix
 	HostName 10.1.9.67
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 	LocalForward 10.255.5.192:9001 10.1.9.110:443
+
+Host amx-sp1prx.bastion1.amix
+	HostName 10.77.99.81
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 # Sura
 Host grafana.sura ORAPR1 10.140.227.121
@@ -525,3 +545,7 @@ Host rn.nagumo 10.255.207.1
 	HostName 10.255.207.1
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 	ProxyCommand ssh -q bastion1.amix -W %h:%p
+
+Host mail.amixlabs.bastion1.amix
+	User root
+	HostName mail.amixlabs.com.br
