@@ -65,13 +65,6 @@ bash-it enable alias git
 bash-it enable completion git
 ```
 
-### Bash-it - plugins
-
-```bash
-brew install fasd
-bash-it enable plugin fasd
-```
-
 ### Git - config
 
 Edit your `.gitconfig`
@@ -84,9 +77,8 @@ Edit your `.gitconfig`
 Enable [diff-so-fancy](https://github.com/stevemao/diff-so-fancy) to improve readability.
 
 ```
-brew install gnu-sed
-npm install -g diff-so-fancy
-git dsf # dsf is a git-alias for diff-so-fancy
+brew install diff-so-fancy
+git config --global core.pager "LC_ALL=C diff-so-fancy | less --tabs=4 -RFX"
 ```
 
 ### Tmux - config
@@ -94,6 +86,7 @@ git dsf # dsf is a git-alias for diff-so-fancy
 [Copy & Paste on OS X: A Better Future](https://robots.thoughtbot.com/tmux-copy-paste-on-os-x-a-better-future)
 
 ```
+brew install tmux
 brew install reattach-to-user-namespace
 ```
 
@@ -117,6 +110,15 @@ In VS Code`s User Settings change:
 
 ```
 "terminal.integrated.shell.osx": "code-shell"
+```
+
+Enable [Git Editor](https://code.visualstudio.com/docs/editor/versioncontrol#_vs-code-as-git-editor)
+
+Edit your `.gitconfig`
+
+```bash
+[include]
+  path = ~/dotfiles/gitconfig-vscode
 ```
 
 ### Vim - config
@@ -176,42 +178,28 @@ and I need to remove the symbolic link `rm ~/.ssh/config`
 [Nerd-fonts](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf) for [vim-devicons](https://github.com/ryanoasis/vim-devicons) plugin.
 Download and configure nerd-fonts into iTerm!
 
+```bash
+brew tap homebrew/cask-fonts
+brew cask install font-hack-nerd-font
+```
+
+Configure _Hack Nerd Font_ into iTerm Profile Text and check _Use built-in Powerline glyphs_.
+Configure _Hack Nerd Font_ into _Terminal: Integrated: Font Family_ into vscode.
+
 ### MacOS defaults
 
 ```
 ./dotfiles/macos
 ```
 
-### GPG OSX
+### GPG macOS
 
-[Reference](https://stackoverflow.com/questions/39494631/gpg-failed-to-sign-the-data-fatal-failed-to-write-commit-object-git-2-10-0)
-
-```
-git config --global gpg.program gpg1
-brew install gpg1
+```bash
+brew install gpg
+git config --global gpg.program gpg
 ```
 
 ## Commands
-
-### getsrt
-
-Search subtitles for MP4/M4V files based on filename.
-
-Requires `subtitler` command line and `PHP`. OSX install:
-
-```bash
-npm install subtitler -g
-```
-
-### addtags
-
-Add tags onto MP4/M4V files based on filename pattern.
-
-Requires `mp4tags` command line. OSX install:
-
-```bash
-brew install mp4v2
-```
 
 ### ssh_passwd
 

@@ -3,6 +3,7 @@
     autocrlf = input
     excludesfile = ~/dotfiles/gitignore
     precomposeunicode = true
+	pager = LC_ALL=C diff-so-fancy | less --tabs=4 -RFX
 [merge]
     tool = hvimdiff
 [color]
@@ -30,8 +31,8 @@
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
     mylog = log --pretty=format:'%h %s [%an]' --graph
     grp = grep --break --heading --line-number
-    dsf = "!git diff --color $@ | diff-so-fancy"
     branch-prune = "!git fetch --prune && git branch -vv | cut -c 3- | awk '/gone/{print $1}' | xargs git branch -D"
 [grep]
     extendRegexp = true
     lineNumber = true
+

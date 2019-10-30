@@ -28,7 +28,7 @@ set -o vi
 # set -o ignoreeof
 
 # Set up text editing/viewing.
-export LANG=en_US.utf-8
+export LANG=en_US.UTF-8
 export CLICOLOR=1 # Colorizes output of ls and others.
 export EDITOR=vim
 export VISUAL=$EDITOR
