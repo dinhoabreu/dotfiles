@@ -39,8 +39,7 @@ Host bastion3.amix
 	HostName 10.255.33.20
 
 Host *.bastion1.amix
-	User amix.eea
-	ProxyCommand ssh -q bastion1.amix -W %h:%p
+	ProxyCommand ssh -q amix.eea@bastion1.amix -W %h:%p
 	IdentityFile %d/.ssh/id_amix_bastion1
 
 Host siga.bastion1.amix amzbrxp02
@@ -50,6 +49,7 @@ Host siga.bastion1.amix amzbrxp02
 # Command: Psql
 Host pg.erp.bastion1.amix amsxbl01
 	HostName 10.255.19.22
+	LocalForward 10.255.5.192:5008 127.0.0.1:5008
 
 Host amsxd09 gitlab.oxxys.lan
 	User root
@@ -99,7 +99,7 @@ Host alan
 	HostName 10.255.1.146
 	IdentityFile %d/.ssh/id_amsxf01
 
-Host amzbrxp03.bastion1.amix
+Host amzbrxp03.bastion1.amix erp.bastion1.amix
 	User amix.eea
 	HostName 10.255.18.23
 	IdentityFile %d/.ssh/id_amix_bastion1
@@ -309,7 +309,7 @@ Host bastion3.gol
 Host *.bastion1.gol
 	ProxyCommand ssh -q bastion1.gol -W %h:%p
 	IdentityFile %d/.ssh/id_gol_bastion1
-	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+	RemoteForward 127.0.0.1:9001 127.0.0.1:9001
 
 Host *.bastion2.gol
 	ProxyCommand ssh -q bastion2.gol -W %h:%p
@@ -320,28 +320,20 @@ Host *.bastion3.gol
 Host zabbix.bastion1.gol zabbix.bastion2.gol zabbix.bastion3.gol
 	User amix.eea
 	HostName 10.4.170.246
-	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+	LocalForward 127.0.0.1:10058 127.0.0.1:10058
 
 Host zabbix2.bastion1.gol zabbix2.bastion2.gol zabbix2.bastion3.gol
 	User amix.eea
 	HostName 10.4.171.11
-	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host cloop.bastion1.gol cloop.bastion2.gol cloop.bastion3.gol
 	User amix.eea
 	HostName 10.255.1.31
-	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host captive-portal.bastion1.gol
 	User amix.eea
 	HostName 10.4.1.13
-	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 	LocalForward 127.0.0.1:3000 192.168.2.1:80
-
-Host portal.gol
-	User bases
-	HostName 10.4.170.93
-	IdentityFile ~/.ssh/id_amsxf01
 
 Host rootnet.gol
 	User amix.eea
@@ -364,6 +356,12 @@ Host despacho-hom.bastion1.gol
 	User amix.eea
 	HostName 10.4.255.107
 
+# Homologação 2
+Host despacho-hom2.bastion1.gol
+	User amix.eea
+	HostName 10.4.255.108
+
+
 Host rdesktop.gol
 	User amix.eea
 	HostName 10.4.170.246
@@ -378,10 +376,14 @@ Host zabbix.dasa
 	IdentityFile %d/.ssh/id_amsxf01
 
 # Prime
-Host portal.prime portal.prime.amix
+Host portal-prime portal-prime.bastion1.amix
 	User centos
 	HostName 52.206.145.35
-	IdentityFile ~/.ssh/prime.pem
+	LocalForward 10.255.5.192:5432 prime-db-prod-legado.ceutrzwfolnn.us-east-1.rds.amazonaws.com:5432
+
+Host portal-prime-hom portal-prime-hom.bastion1.amix
+  User centos
+  HostName 35.174.41.45
 
 # Stam
 Host fw.stam
@@ -439,10 +441,9 @@ Host zabbix.danone
 	User root
 	HostName 10.8.1.63
 
-Host byod.danone.amix
-	User root
+Host byod.danone.bastion1.amix
+	User amix.eea
 	HostName 172.16.0.1
-	IdentityFile %d/.ssh/id_amsxf01
 	LocalForward 8081 172.16.0.1:81
 	LocalForward 8082 172.16.0.1:82
 	LocalForward 8083 172.16.0.1:83
@@ -462,6 +463,10 @@ Host dev.wp.sfp.amix
 	Port 22
 
 # GPTW
+Host bastion1.gptw
+  User amix.eea
+  HostName 10.55.164.20
+
 Host gptw.aws.amix gptw.aws
 	User root
 	HostName 54.201.133.78
