@@ -1,7 +1,7 @@
 export ZSH="/Users/edison/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 
