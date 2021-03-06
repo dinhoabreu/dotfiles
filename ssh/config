@@ -72,7 +72,7 @@ Host pg.erp.bastion1.amix amsxbl01
 	LocalForward 0.0.0.0:5008 127.0.0.1:5008
 Host amsxp02
 	User edison
-	HostName amsxp02
+	HostName 10.255.1.22
 	IdentityFile %d/.ssh/id_rsa
 
 Host mpro01.amix
@@ -179,9 +179,14 @@ Host cloop.bastion*.azul
 	User amix
 	HostName 10.0.5.110
 
-Host hom.cloop.bastion*.azul
+Host cloop-hom.bastion*.azul
 	User amix
 	HostName 10.0.10.110
+
+
+Host cloop-hom-new.bastion*.azul
+	User amix
+	HostName 10.0.10.62
 
 Host certdig.bastion*.azul
 	HostName 10.0.5.168
@@ -214,7 +219,7 @@ host grafana.bastion*.azul
 	Hostname 10.0.254.227
 	LocalForward 4080 10.0.254.227:3000
 
-host hom.grafana.bastion*.azul
+host grafana-hom.bastion*.azul
 	Hostname 10.0.254.228
 	LocalForward 4090 10.0.254.228:3000
 
@@ -344,16 +349,15 @@ Host bastion1.gol
 Host bastion2.gol
 	HostName 10.4.175.15
 	User amix.eea
-	IdentityFile %d/.ssh/id_amsxf01
 	ProxyCommand ssh -q bastion2.amix -W %h:%p
 
 Host bastion3.gol
 	HostName 10.4.175.16
 	User amix.eea
-	IdentityFile %d/.ssh/id_amsxf01
 	ProxyCommand ssh -q bastion3.amix -W %h:%p
 
 Host *.bastion1.gol
+	User amix.eea
 	ProxyCommand ssh -q bastion1.gol -W %h:%p
 	IdentityFile %d/.ssh/id_gol_bastion1
 	RemoteForward 127.0.0.1:9001 127.0.0.1:9001
@@ -364,9 +368,32 @@ Host *.bastion2.gol
 Host *.bastion3.gol
 	ProxyCommand ssh -q bastion3.gol -W %h:%p
 
+# Elasticsearch
+Host es.bastion1.gol
+	HostName OCIGOLLPRDAP148
+
+# Kibana
+Host kb.bastion1.gol
+	HostName OCIGOLLPRDAP147
+	LocalForward 127.0.0.1:5601 127.0.0.1:5601
+
+# Logstash
+Host ls.bastion1.gol
+	HostName OCIGOLLPRDAP146
+
 Host whatsapp.bastion1.gol
 	User amix.eea
 	HostName 10.50.8.77
+
+# Infraero
+Host infraero-oci-hom.bastion1.gol
+	HostName 10.180.50.184
+
+Host infraero-oci-prd1.bastion1.gol
+	HostName 10.80.50.23
+
+Host infraero-oci-prd2.bastion1.gol
+	HostName 10.80.50.237
 
 Host zabbix.bastion1.gol zabbix.bastion2.gol zabbix.bastion3.gol
 	User amix.eea
@@ -415,6 +442,12 @@ Host despacho-hom.bastion1.gol
 	User amix.eea
 	HostName 10.4.255.107
 	LocalForward 127.0.0.1:9000 gol-eloadsheet-bkp.flyware.net:80
+
+# Homologação OCI
+Host despacho-hom-oci.bastion1.gol
+	User amix.eea
+	HostName 10.180.20.28
+	LocalForward 127.0.0.1:4080 10.180.10.46:80
 
 Host rdesktop.gol
 	User amix.eea
@@ -484,6 +517,10 @@ Host rootnet.iesc
 	IdentityFile %d/.ssh/id_rsa
 
 # CBA
+Host ws-sap-hom.bastion1.amix
+	HostName 10.57.1.8
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+
 Host aceite.ged.cba
 	User root
 	HostName 10.56.4.9
@@ -609,6 +646,8 @@ Host bastion1.sura
 	HostName 10.140.239.20
 
 Host *.bastion1.sura
+	User amix.eea
+	IdentityFile %d/.ssh/id_sura_bastion1
 	ProxyCommand ssh -q bastion1.sura -W %h:%p
 	
 Host bastion2.sura
@@ -638,6 +677,10 @@ Host zbx002.bastion1.sura
 	User amix.eea
 	HostName 10.140.228.127
 	IdentityFile %d/.ssh/id_sura_bastion1
+
+Host surariosrvctm001.bastion1.sura
+	HostName 10.140.228.51
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 # Nagumo
 Host rn.nagumo 10.255.207.1
