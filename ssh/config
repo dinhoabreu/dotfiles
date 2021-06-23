@@ -31,9 +31,7 @@ Host amsxd01
 	HostName 10.255.1.41
 
 Host amsxd08 amsxd08.bastion1.amix
-	User devops
 	HostName 10.255.1.48
-	IdentityFile %d/.ssh/id_rsa
 
 Host amsxm07
 	User root
@@ -59,15 +57,22 @@ Host bastion3.amix
 
 Host *.bastion1.amix
 	User amix.eea
-	ProxyCommand ssh -q bastion1.amix -W %h:%p
 	IdentityFile %d/.ssh/id_amix_bastion1
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+
+Host lg0.amix
+	User root
+	HostName 10.255.1.24
+	IdentityFile %d/.ssh/id_rsa
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+	LocalForward 127.0.0.1:5602 127.0.0.1:5601
 
 Host siga.bastion1.amix amzbrxp02.bastion1.amix amzbrxp02
 	HostName 10.255.18.22
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 # Command: Psql
-Host pg.erp.bastion1.amix amsxbl01
+Host pg.erp.bastion1.amix amsxbl01 pg-rncrm.bastion1.amix
 	HostName 10.255.19.22
 	LocalForward 0.0.0.0:5008 127.0.0.1:5008
 Host amsxp02
@@ -116,7 +121,7 @@ Host alan
 	HostName 10.255.1.146
 	IdentityFile %d/.ssh/id_amsxf01
 
-Host amzbrxp03.bastion1.amix erp.bastion1.amix
+Host amzbrxp03.bastion1.amix erp.bastion1.amix rncrm.bastion1.amix
 	User amix.eea
 	HostName 10.255.18.23
 	IdentityFile %d/.ssh/id_amix_bastion1
@@ -141,6 +146,28 @@ Host amsxkb2.bastion1.amix
 	HostName 10.255.1.195
 	IdentityFile %d/.ssh/id_amix_bastion1
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+
+Host ceph*.amix
+	User root
+	IdentityFile %d/.ssh/id_amix_bastion1
+
+Host ceph00.amix
+	HostName 10.255.5.141
+
+Host ceph01.amix
+	HostName 10.255.5.147
+
+Host ceph02.amix
+	HostName 10.255.5.183
+
+Host ceph03.amix
+	HostName 10.255.5.161
+
+Host ceph04.amix
+	HostName 10.255.5.129
+
+Host ceph05.amix
+	HostName 10.255.5.180
 
 # Bohler
 Host bohler bohler.amix
@@ -441,7 +468,7 @@ Host despacho2.bastion1.gol
 Host despacho-hom.bastion1.gol
 	User amix.eea
 	HostName 10.4.255.107
-	LocalForward 127.0.0.1:9000 gol-eloadsheet-bkp.flyware.net:80
+	# LocalForward 127.0.0.1:9000 gol-eloadsheet-bkp.flyware.net:80
 
 # Homologação OCI
 Host despacho-hom-oci.bastion1.gol
@@ -475,16 +502,18 @@ Host zabbix.dasa
 	IdentityFile %d/.ssh/id_amsxf01
 
 # Prime
+
+# Migrado para prime-br-prd-web01
 Host portal.prime portal.prime.amix
 	User centos
 	HostName 52.206.145.35
 	#IdentityFile ~/.ssh/prime.pem
-	#
+
+# Migrado para prime-us-hom-web01
 Host portal-hom.prime portal-hom.prime.amix
 	User centos
 	HostName 35.174.41.45
 	#IdentityFile ~/.ssh/prime.pem
-
 
 Host newwave.prime newwave.prime.amix
 	User centos
@@ -493,6 +522,32 @@ Host newwave.prime newwave.prime.amix
 Host staging.prime
 	User centos
 	HostName 18.205.46.34
+
+Host prime-us-fw01.prime
+	User amix.eea
+	HostName 35.172.91.181
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+
+Host prime-br-fw01.prime
+	User centos
+	HostName 18.230.165.51
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+
+Host prime-br-prd-web01.bastion1.amix prime-br-prd-web01
+	# https://52.67.98.165/
+	# User centos
+	HostName 10.98.70.100
+	# ProxyCommand ssh -q fw-us.prime -W %h:%p
+	#User amix.eea
+	#IdentityFile %d/.ssh/id_amix_bastion1
+
+Host prime-us-hom-web01.bastion1.amix prime-us-hom-web01
+	# https://54.87.244.94/
+	# User centos
+	HostName 10.98.44.100
+	# ProxyCommand ssh -q fw-us.prime -W %h:%p
+	# User amix.eea
+	# IdentityFile %d/.ssh/id_amix_bastion1
 
 # Stam
 Host fw.stam
@@ -693,3 +748,12 @@ Host rn.nagumo 10.255.207.1
 Host mail.amixlabs.bastion1.amix
 	User root
 	HostName mail.amixlabs.com.br
+
+# Ambev
+Host promax.ambev 172.18.188.62
+	User BRAMX0002
+	HostName 172.18.188.62
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+	LocalForward 127.0.0.1:8080 127.0.0.1:80
+	LocalForward 127.0.0.1:8082 127.0.0.1:82
+	IdentityFile %d/.ssh/id_ambev
