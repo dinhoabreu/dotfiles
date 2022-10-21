@@ -44,3 +44,4 @@ set -o vi
 source ~/dotfiles/zsh/functions.sh
 
 bindkey '^ ' autosuggest-accept
+bindkey -M vicmd v edit-command-line
