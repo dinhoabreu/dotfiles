@@ -4,13 +4,16 @@ ServerAliveInterval 60
 # macOS
 AddKeysToAgent yes
 UseKeychain yes
-
+UserKnownHostsFile ~/.ssh/known_hosts
+GlobalKnownHostsFile /dev/null
+IdentityAgent ~/.1password/agent.sock
 
 # Home
 Host ubuntu01
 	User root
 	HostName 192.168.10.15
-	IdentityFile %d/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host storm
 	HostName 10.255.5.192
@@ -18,32 +21,45 @@ Host storm
 Host ora01
 	User opc
 	HostName 168.138.134.0
-	IdentityFile %d/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host ora02
 	User opc
 	HostName 140.238.180.112
-	IdentityFile %d/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 # AMIX
-Host amsxd01
+Host amsxd01 amsxd01.bastion1.amix
 	User edison
 	HostName 10.255.1.41
+	KexAlgorithms diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+	HostKeyAlgorithms ssh-rsa,ssh-dss
+	PubkeyAcceptedKeyTypes +ssh-rsa
+	SetEnv LC_ALL=en_US.utf-8
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
+	ForwardAgent yes
 
 Host amsxd08 amsxd08.bastion1.amix
 	HostName 10.255.1.48
+	ForwardAgent yes
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+	LocalForward 127.0.0.1:3000 127.0.0.1:3000
 
-Host amsxm07
+Host amsxm07 amsxm07.bastion1.amix
 	User root
 	HostName 10.255.1.37
-# Host 10.255.1.34
-# 	User root
-# 	ProxyCommand ssh -q amsxf01 -W %h:%p
 
-# Moema
-Host bastion1.amix
+Host amsxm08 amsxm08.bastion1.amix # Hapvida - Testes com Ansible - Inventário Windows
 	User amix.eea
-	HostName 10.255.1.20
+	HostName 10.255.1.38
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+
+Host amsxm10 amsxm10.bastion1.amix
+	User root
+	HostName 10.255.1.40
 
 # Amazon sa-east-1 (São Paulo)
 Host bastion2.amix
@@ -55,16 +71,30 @@ Host bastion3.amix
 	User amix.eea
 	HostName 10.255.33.20
 
+# Work
+Match host vs-ssh.visualstudio.com exec "[[ $(networksetup -getcurrentlocation) == Work ]]"
+	ProxyJump bastion1.amix
+
+Match host github.com exec "[[ $(networksetup -getcurrentlocation) == Work ]]"
+	ProxyJump bastion1.amix
+
+Match host bastion1.amix exec "[[ $(networksetup -getcurrentlocation) == Work ]]"
+	HostName 10.255.5.20
+
+Host bastion1.amix
+	User amix.eea
+	HostName 10.255.1.20
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
+
 Host *.bastion1.amix
 	User amix.eea
-	IdentityFile %d/.ssh/id_amix_bastion1
-	ProxyCommand ssh -q bastion1.amix -W %h:%p
+	IdentityFile ~/.ssh/id_rsa_amix_bastion1.pub
+	IdentitiesOnly yes
+	ProxyJump bastion1.amix
 
 Host lg0.amix
-	User root
 	HostName 10.255.1.24
-	IdentityFile %d/.ssh/id_rsa
-	ProxyCommand ssh -q bastion1.amix -W %h:%p
 	LocalForward 127.0.0.1:5602 127.0.0.1:5601
 
 Host siga.bastion1.amix amzbrxp02.bastion1.amix amzbrxp02
@@ -78,18 +108,19 @@ Host pg.erp.bastion1.amix amsxbl01 pg-rncrm.bastion1.amix
 Host amsxp02
 	User edison
 	HostName 10.255.1.22
-	IdentityFile %d/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host mpro01.amix
 	User edison
 	HostName home.twdnet.com.br
 	Port 8322
-	IdentityFile %d/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host rootspot.amix
 	User root
 	HostName 10.255.20.9
-	IdentityFile %d/.ssh/id_amsxf01
 	LocalForward 8081 10.255.20.9:8081
 	LocalForward 8082 10.255.20.9:8082
 	LocalForward 8083 10.255.20.9:8083
@@ -101,11 +132,13 @@ Host db-younow.bastion1.amix pg12.bastion1.amix
 
 Host db2-younow.bastion1.amix pg13.bastion1.amix
 	HostName 10.255.52.22
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 # Host tunnel-bitbucket.org bitbucket.org
 # 	User git
 # 	HostName bitbucket.org
-# 	IdentityFile %d/.ssh/id_rsa
+# 	IdentityFile ~/.ssh/id_rsa.pub
+# 	IdentitiesOnly yes
 # 	ProxyCommand ssh -q bastion1.amix -W %h:%p
 
 Host dev02 lucas
@@ -119,43 +152,45 @@ Host dev03 flavia
 Host alan
 	User alan
 	HostName 10.255.1.146
-	IdentityFile %d/.ssh/id_amsxf01
 
 Host amzbrxp03.bastion1.amix erp.bastion1.amix rncrm.bastion1.amix
 	User amix.eea
 	HostName 10.255.18.23
-	IdentityFile %d/.ssh/id_amix_bastion1
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host nginx-amadeus.bastion1.amix
 	User amix.eea
 	HostName 10.255.16.200
-	IdentityFile %d/.ssh/id_amix_bastion1
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host amsxkb1.bastion1.amix
 	User amix.eea
 	HostName 10.255.1.194
-	IdentityFile %d/.ssh/id_amix_bastion1
 	LocalForward 0.0.0.0:4000 127.0.0.1:30031
 	LocalForward 0.0.0.0:5000 127.0.0.1:30003
 	LocalForward 0.0.0.0:30021 127.0.0.1:30021
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host amsxkb2.bastion1.amix
 	User amix.eea
 	HostName 10.255.1.195
-	IdentityFile %d/.ssh/id_amix_bastion1
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+
+Host amsxkb3.bastion1.amix
+	User amix.eea
+	HostName 10.255.1.196
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host ceph*.amix
 	User root
-	IdentityFile %d/.ssh/id_amix_bastion1
 
 Host ceph00.amix
 	HostName 10.255.5.141
+	LocalForward 127.0.0.1:8443 127.0.0.1:8443
 
 Host ceph01.amix
 	HostName 10.255.5.147
+	LocalForward 127.0.0.1:8443 127.0.0.1:8443
 
 Host ceph02.amix
 	HostName 10.255.5.183
@@ -173,34 +208,39 @@ Host ceph05.amix
 Host bohler bohler.amix
 	User root
 	HostName 172.25.80.18
-	IdentityFile %d/.ssh/id_amsxf01
 	LocalForward 51433 172.16.27.101:1433
 
 # Azul
 Host bastion1.azul
 	User amix.eea
 	HostName 10.0.7.8
-	IdentityFile ~/.ssh/id_amsxf01
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host bastion2.azul
 	User amix.eea
 	HostName 10.0.7.9
-	IdentityFile ~/.ssh/id_amsxf01
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host *.bastion1.azul
 	User amix.eea
-	IdentityFile ~/.ssh/id_azul_bastion1
 	ProxyCommand ssh -q bastion1.azul -W %h:%p
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host *.bastion2.azul
 	User amix.eea
-	IdentityFile ~/.ssh/id_azul_bastion2
 	ProxyCommand ssh -q bastion2.azul -W %h:%p
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
 Host rn.bastion*.azul
 	HostName 10.0.254.249
+
+Host CTRLWKAPPUTB01P.bastion1.azul
+	HostName 10.0.5.46
+
+Host CTRLWKAPPUTB02P.bastion1.azul
+	HostName 10.0.5.47
 
 Host cloop.bastion*.azul
 	User amix
@@ -228,8 +268,14 @@ host zabbix.bastion*.azul
 host zabbix2.bastion*.azul
 	Hostname 10.0.100.56
 
+# 21.07.16
+# Host should have been off for more than a year
 host zabbix3.bastion*.azul
 	Hostname 10.169.2.25
+
+host console-cloop.bastion1.azul
+	User amix.eea
+	Hostname 10.0.5.45
 
 host ecomex.bastion1.azul
 	User amix.eea
@@ -241,163 +287,200 @@ host zabbix4.bastion*.azul
 
 host dc01.bastion*.azul
 	Hostname 10.0.254.240
+	LocalForward 0.0.0.0:1433 149.122.13.148:52900
 
 host grafana.bastion*.azul
-	Hostname 10.0.254.227
-	LocalForward 4080 10.0.254.227:3000
+	# Hostname 10.0.254.227
+	Hostname 10.0.16.107
+	LocalForward 4080 10.0.16.107:3000
 
 host grafana-hom.bastion*.azul
-	Hostname 10.0.254.228
-	LocalForward 4090 10.0.254.228:3000
-
-# CDF
-Host 10.255.253.* hosts.cdf
-	User root
-	IdentityFile %d/.ssh/id_amsxf01
-	ProxyCommand ssh -q amsxf01 -W %h:%p
-	#LocalForward 8081 10.190.24.1:8081
-	#LocalForward 8082 10.190.24.1:8082
-	#LocalForward 8083 10.190.24.1:8083
-	#LocalForward 9081 10.190.56.1:9081
-	#LocalForward 9082 10.190.56.1:9082
-	#LocalForward 9083 10.190.56.1:9083
-
-Host zabbix.cdf
-	User root
-	HostName 10.250.112.120
+	# Hostname 10.0.254.228
+	Hostname 10.0.16.108
+	LocalForward 4090 10.0.16.108:3000
 
 # Tozzini
 Host dev.web.tozzini
 	User tfweb
 	HostName 10.10.0.4
-	IdentityFile %d/.ssh/id_amsxf01
 	LocalForward 192.168.33.1:3306 10.120.0.133:3306
 
 Host root.dev.web.tozzini
 	User root
 	HostName 10.10.0.4
-	IdentityFile %d/.ssh/id_amsxf01
 
 Host dev.intranet.tozzini
 	User root
 	HostName 10.10.0.5
-	IdentityFile %d/.ssh/id_amsxf01
 	ProxyCommand ssh -q dev.web.tozzini -W %h:%p
 	LocalForward 8080 127.0.0.1:80
 
 Host prd.systemweb.tozzini
 	User root
 	HostName 10.10.0.68
-	IdentityFile %d/.ssh/id_amsxf01
 
 Host git.systemweb.bastion1.tozzini 10.10.0.70
 	HostName 10.10.0.70
-	IdentityFile %d/.ssh/id_tozzini_bastion1
 
 # correspondentes acpcliente
 Host hom.systemweb.bastion1.tozzini
 	User amix.eea
 	HostName 10.120.0.146
-	IdentityFile %d/.ssh/id_tozzini_bastion1
 
 # front-end acpcliente
 Host prd.systemweb.bastion1.tozzini
 	User amix.eea
 	HostName 172.16.120.141
-	IdentityFile %d/.ssh/id_tozzini_bastion1
 
 # back-end acpcliente
 Host prd.api.bastion1.tozzini
 	User amix.eea
 	HostName 172.16.120.131
-	IdentityFile %d/.ssh/id_tozzini_bastion1
 
 Host openvpn.bastion1.tozzini
 	User amix.eea
-	HostName 10.10.0.118
-	IdentityFile %d/.ssh/id_tozzini_bastion1
+	# HostName 10.10.0.118
+	HostName 10.10.0.58
 
 Host openvpn2.bastion1.tozzini
 	User amix.eea
-	HostName 10.120.0.35
-	IdentityFile %d/.ssh/id_tozzini_bastion1
+	# HostName 10.120.0.35
+	HostName 10.120.0.58
 
-Host zabbix.tozzini
+Host notif.bastion1.tozzini
 	User amix.eea
-	HostName 10.10.0.136
-	IdentityFile %d/.ssh/id_tozzini_bastion1
-	ProxyCommand ssh -q bastion1.tozzini -W %h:%p
+	# sudo tfweb
+	HostName 10.120.0.234
 
 Host blgs018 bastion1.tozzini 10.10.0.43
 	User amix.eea
 	HostName 10.10.0.43
-	IdentityFile %d/.ssh/id_amsxf01
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host dccs028 bastion2.tozzini 10.120.0.143
 	User amix.eea
 	HostName 10.120.0.143
-	IdentityFile %d/.ssh/id_amsxf01
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host dccs013.bastion1.tozzini 172.16.120.131
 	User amix.eea
 	HostName 172.16.120.131
-	IdentityFile %d/.ssh/id_tozzini_bastion1
 
 Host *.bastion1.tozzini
+	User amix.eea
 	ProxyCommand ssh -q bastion1.tozzini -W %h:%p
-	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+	RemoteForward 127.0.0.1:9001 127.0.0.1:9001
+	IdentityFile ~/.ssh/id_bastion1_tozzini.pub
+	IdentitiesOnly yes
 
 Host *.bastion2.tozzini
+	User amix.eea
 	ProxyCommand ssh -q bastion2.tozzini -W %h:%p
+	RemoteForward 127.0.0.1:9001 127.0.0.1:9001
+	IdentityFile ~/.ssh/id_bastion1_tozzini.pub
+	IdentitiesOnly yes
+
+Host zabbix.bastion1.tozzini
+	HostName 10.10.0.136
+	LocalForward 127.0.0.1:8443 127.0.0.1:443
 
 Host dc.intranet.tozzini
 	User tfweb
 	HostName 172.16.120.103
-	IdentityFile %d/.ssh/id_amsxf01
 	ProxyCommand ssh -q dev.web.tozzini -W %h:%p
 
 Host dc.api.bastion1.tozzini
 	# Fsclh2#
 	User amix.eea
 	HostName 172.16.120.101
-	IdentityFile %d/.ssh/id_tozzini_bastion1
 	# tests
 	LocalForward 127.0.0.1:3000 172.16.120.101:443
 	# deploy
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
+# Simpar
+
+# 10.150.0.116
+Host rootquery-simpar.bastion1.amix
+		HostName 10.150.0.187
+	RemoteForward 127.0.0.1:9001 127.0.0.1:9001
+
 # Gol
 Host bastion1.gol
 	HostName 10.4.104.15
 	User amix.eea
-	IdentityFile %d/.ssh/id_amsxf01
-	ProxyCommand ssh -q bastion1.amix -W %h:%p
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host bastion2.gol
 	HostName 10.4.175.15
 	User amix.eea
-	ProxyCommand ssh -q bastion2.amix -W %h:%p
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
+	ProxyJump bastion2.amix
 
 Host bastion3.gol
 	HostName 10.4.175.16
 	User amix.eea
-	ProxyCommand ssh -q bastion3.amix -W %h:%p
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
+	ProxyJump bastion3.amix
+
+Host *.bastion?.gol
+	User amix.eea
+	RemoteForward 127.0.0.1:9001 127.0.0.1:9001
+	IdentityFile ~/.ssh/id_gol_bastion1.pub
+	IdentitiesOnly yes
 
 Host *.bastion1.gol
-	User amix.eea
-	ProxyCommand ssh -q bastion1.gol -W %h:%p
-	IdentityFile %d/.ssh/id_gol_bastion1
-	RemoteForward 127.0.0.1:9001 127.0.0.1:9001
+	ProxyJump bastion1.gol
 
 Host *.bastion2.gol
-	ProxyCommand ssh -q bastion2.gol -W %h:%p
+	ProxyJump bastion2.gol
 
 Host *.bastion3.gol
-	ProxyCommand ssh -q bastion3.gol -W %h:%p
+	ProxyJump bastion3.gol
+
+# RabbitMQ homologação
+Host rmq-hom?.bastion?.gol
+	SetEnv LC_ALL=en_US.utf-8
+	LocalForward 127.0.0.1:15672 127.0.0.1:15672
+
+Host rmq-hom1.bastion?.gol
+	HostName 10.180.50.162
+
+Host rmq-hom2.bastion?.gol
+	HostName 10.180.50.208
+
+Host rmq-hom3.bastion?.gol
+	HostName 10.180.50.129
 
 # Elasticsearch
-Host es.bastion1.gol
-	HostName OCIGOLLPRDAP148
+Host es-dev.bastion1.gol
+	HostName 10.80.130.95
+	LocalForward 127.0.0.1:9200 127.0.0.1:9200
+
+Host es-prd1.bastion1.gol
+	HostName 10.80.130.8
+	LocalForward 127.0.0.1:9200 127.0.0.1:9200
+
+Host es-prd2.bastion1.gol
+	HostName 10.80.130.155
+	LocalForward 127.0.0.1:9200 127.0.0.1:9200
+
+Host es-prd3.bastion1.gol
+	HostName 10.80.130.168
+	LocalForward 127.0.0.1:9200 127.0.0.1:9200
+
+Host kb-dev.bastion1.gol
+	HostName 10.80.130.57
+	LocalForward 127.0.0.1:5601 127.0.0.1:5601
+
+Host kb-prd.bastion1.gol
+	HostName 10.80.130.77
+	LocalForward 127.0.0.1:5601 127.0.0.1:5601
 
 # Kibana
 Host kb.bastion1.gol
@@ -445,41 +528,56 @@ Host captive-portal.bastion1.gol
 Host portal.gol
 	User bases
 	HostName 10.4.170.93
-	IdentityFile ~/.ssh/id_amsxf01
 
 Host rootnet.gol
 	User amix.eea
 	HostName 10.4.170.224
-	IdentityFile %d/.ssh/id_gol_bastion1
 	ProxyCommand ssh -q bastion1.gol -W %h:%p
 
 # Produção
-Host despacho1.bastion1.gol
+Host despacho1.bastion1.gol route-max.bastion1.gol
+	User amix.eea
+	HostName 10.80.20.4
+	LocalForward 127.0.0.1:9000 eloadsheet.voegol.com.br:80
+
+Host despacho1-old.bastion1.gol
 	User amix.eea
 	HostName 10.4.170.93
 	LocalForward 127.0.0.1:9000 eloadsheet.voegol.com.br:80
 
 # Contingência
-Host despacho2.bastion1.gol
+Host despacho2.bastion?.gol
 	User amix.eea
-	HostName 10.4.255.7
+	HostName 10.81.20.182
+
+# Homologação OCI
+Host despacho-hom.bastion1.gol
+	User amix.eea
+	HostName 10.180.20.28
+	LocalForward 127.0.0.1:4080 127.0.0.1:80
 
 # Homologação
-Host despacho-hom.bastion1.gol
+Host despacho-hom-old.bastion1.gol
 	User amix.eea
 	HostName 10.4.255.107
 	# LocalForward 127.0.0.1:9000 gol-eloadsheet-bkp.flyware.net:80
 
-# Homologação OCI
-Host despacho-hom-oci.bastion1.gol
+# Oooi - out of the gate, off the ground, on the ground, and into the gate
+Host oooi1.bastion1.gol
 	User amix.eea
-	HostName 10.180.20.28
-	LocalForward 127.0.0.1:4080 10.180.10.46:80
+	HostName 10.80.50.23
+
+Host oooi2.bastion1.gol
+	User amix.eea
+	HostName 10.80.50.237
+
+Host oooi-hom.bastion1.gol
+	User amix.eea
+	HostName 10.180.50.184
 
 Host rdesktop.gol
 	User amix.eea
 	HostName 10.4.170.246
-	IdentityFile %d/.ssh/id_gol_bastion1
 	ProxyCommand ssh -q bastion1.gol -W %h:%p
 	LocalForward 127.0.0.1:3389 10.4.175.10:3389
 
@@ -495,11 +593,19 @@ Host redis3.canada.bastion1.gol
 	User amix.eea
 	HostName 10.4.255.63
 
+
+Host grafana-syslog.bastion1.gol
+	User amix.eea
+	HostName 10.80.130.184
+
+Host hom-grafana-syslog.bastion1.gol
+	User amix.eea
+	HostName 10.80.130.163
+
 # Dasa
 Host zabbix.dasa
 	User root
 	HostName 10.253.14.129
-	IdentityFile %d/.ssh/id_amsxf01
 
 # Prime
 
@@ -549,11 +655,16 @@ Host prime-us-hom-web01.bastion1.amix prime-us-hom-web01
 	# User amix.eea
 	# IdentityFile %d/.ssh/id_amix_bastion1
 
-# Stam
-Host fw.stam
-	User root
-	HostName 10.0.0.3
-	IdentityFile %d/.ssh/id_amsxf01
+Host prime-us-prd-stg01.prime
+	User amix.eea
+	HostName 10.98.38.10
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+	#IdentityFile %d/.ssh/id_amix_bastion1
+
+Host prime-us-prd-app01.prime
+	User ubuntu
+	HostName 10.98.38.14
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
 
 # Jurd
 Host rn.iurd.amix
@@ -564,45 +675,51 @@ Host rn.iurd.amix
 Host zabbix.iesc
 	User root
 	HostName 10.254.0.145
-	IdentityFile %d/.ssh/id_amsxf01
 
 Host rootnet.iesc
 	User root
 	HostName 10.254.0.104
-	IdentityFile %d/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 # CBA
-Host ws-sap-hom.bastion1.amix
+Host bastion1.cba
+	HostName 10.107.0.171
+	User amix.eea
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
+
+Host *.bastion1.cba
+	User amix.eea
+	IdentityFile ~/.ssh/id_rsa_cba_bastion1.pub
+	IdentitiesOnly yes
+	ProxyJump bastion1.cba
+
+Host sisf-hom.bastion1.cba
+	HostName 10.107.0.48
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+	LocalForward 127.0.0.1:9443 127.0.0.1:443
+
+Host sisf-prd.bastion1.cba
+	HostName 10.107.0.49
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
+
+Host ws-sap-hom.bastion1.cba
 	HostName 10.57.1.8
 	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 
-Host aceite.ged.cba
-	User root
+Host ged-hom.bastion1.cba
+	HostKeyAlgorithms ssh-rsa,ssh-dss
+	PubkeyAcceptedKeyTypes +ssh-rsa
 	HostName 10.56.4.9
-	IdentityFile %d/.ssh/id_amsxf01
 
-Host prd.ged.cba
-	User root
+Host ged-prd.bastion1.cba
+	HostKeyAlgorithms ssh-rsa,ssh-dss
+	PubkeyAcceptedKeyTypes +ssh-rsa
 	HostName 10.56.3.20
-	IdentityFile %d/.ssh/id_amsxf01
 
-Host cloop.somos.amix
-	User root
-	HostName 10.196.7.53
-	ServerAliveInterval 60
-	IdentityFile %d/.ssh/id_amsxf01
-
-Host cuias.cloop.somos
-	User amix
-	HostName 10.195.1.133
-	ServerAliveInterval 60
-	ProxyCommand ssh -q somos.cloop.amix -W %h:%p
-	IdentityFile %d/.ssh/id_amsxf01
-
-Host zabbix.cba
-	User root
+Host zabbix.bastion1.cba
 	HostName 10.107.0.100
-	IdentityFile %d/.ssh/id_rsa
 
 # Danone
 Host zabbix.danone
@@ -612,10 +729,10 @@ Host zabbix.danone
 Host byod.danone.amix
 	User root
 	HostName 172.16.0.1
-	IdentityFile %d/.ssh/id_amsxf01
 	LocalForward 8081 172.16.0.1:81
 	LocalForward 8082 172.16.0.1:82
 	LocalForward 8083 172.16.0.1:83
+	ProxyJump bastion1.amix
 
 # LBCA
 Host host1.lbca.amix
@@ -635,19 +752,22 @@ Host dev.wp.sfp.amix
 Host gptw.aws.amix gptw.aws
 	User root
 	HostName 54.201.133.78
-	IdentityFile %d/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 # VPN 10.255.251.10
 Host nginx.gptw.aws.amix
 	User ec2-user
 	# HostName ec2-54-68-65-182.us-west-2.compute.amazonaws.com
 	HostName 10.255.251.10
-	IdentityFile %d/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host w01.spo.gptw.aws.amix
 	User centos
 	HostName 52.67.98.1
-	IdentityFile %d/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host lb01.bastion1.amix
 	HostName 10.55.160.100
@@ -660,14 +780,16 @@ Host h01.bastion1.amix
 Host personas.gafisa
 	User root
 	HostName 172.22.0.13
-	IdentityFile %d/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 # Conectar
 Host db.conectcar zabbix.conectcar
 	User root
 	#HostName 10.202.11.62
 	HostName 10.255.249.2
-	IdentityFile %d/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host bastion1.conectcar
 	User usr.amixadm
@@ -702,7 +824,6 @@ Host bastion1.sura
 
 Host *.bastion1.sura
 	User amix.eea
-	IdentityFile %d/.ssh/id_sura_bastion1
 	ProxyCommand ssh -q bastion1.sura -W %h:%p
 	
 Host bastion2.sura
@@ -731,7 +852,6 @@ Host nodejs12.bastion1.amix hom-controlm.bastion1.sura SURARIOSRVCTM003
 Host zbx002.bastion1.sura
 	User amix.eea
 	HostName 10.140.228.127
-	IdentityFile %d/.ssh/id_sura_bastion1
 
 Host surariosrvctm001.bastion1.sura
 	HostName 10.140.228.51
@@ -754,6 +874,126 @@ Host promax.ambev 172.18.188.62
 	User BRAMX0002
 	HostName 172.18.188.62
 	ProxyCommand ssh -q bastion1.amix -W %h:%p
+	RemoteForward 127.0.0.1:9000 127.0.0.1:9000
 	LocalForward 127.0.0.1:8080 127.0.0.1:80
 	LocalForward 127.0.0.1:8082 127.0.0.1:82
+	LocalForward 127.0.0.1:8008 127.0.0.1:8008
+	LocalForward 127.0.0.1:8009 127.0.0.1:8009
 	IdentityFile %d/.ssh/id_ambev
+
+Host lx-hml-app-0003.ambev 172.18.188.58
+	User ansible
+	HostName 172.18.188.58
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+	IdentityFile %d/.ssh/id_ambev
+
+# STIX
+Host mon.stix
+	User amixstix
+	#HostName 172.18.196.4
+	HostName 10.1.215.4
+	LocalForward 127.0.0.1:9200 10.1.242.10:9200
+	LocalForward 127.0.0.1:5601 10.1.242.7:5601
+	LocalForward 127.0.0.1:3000 127.0.0.1:3000
+	LocalForward 127.0.0.1:8080 127.0.0.1:80
+
+# HAPVIDA
+Host hapvida.bastion1.amix zabbix.hapvida.bastion1.amix rootquery.hapvida.bastion1.amix
+	HostName 10.1.24.225
+	RemoteForward 127.0.0.1:9001 127.0.0.1:9001
+	LocalForward 127.0.0.1:3000 127.0.0.1:3000
+	LocalForward 127.0.0.1:3001 127.0.0.1:3001
+	LocalForward 127.0.0.1:9440 nutanix.hapvida.com.br:9440
+
+Host bastion1.hapvida
+	User amix.eea
+	HostName 10.1.17.90
+
+Host bastion2.hapvida
+	User amix.eea
+	HostName 10.200.8.10
+
+Host *.bastion1.hapvida
+	User amix.eea
+	ProxyCommand ssh -q bastion1.hapvida -W %h:%p
+	RemoteForward 127.0.0.1:9001 127.0.0.1:9001
+
+Host ansible.bastion1.hapvida
+	HostName 10.1.20.199
+	IdentityFile ~/.ssh/id_hapvida_bastion1.pub
+
+Host transf-dig-prd.bastion1.amix
+	User root
+	HostName 10.1.16.134
+	RemoteForward 127.0.0.1:9001 127.0.0.1:9001
+
+# Hallos
+Host hallos-us-fw01.hallos
+	# User amix.eea
+	User centos
+	HostName 34.194.164.189
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+	LocalForward 127.0.0.1:3306 hallos-us-prd-db01.ca5wnmdxklhx.us-east-1.rds.amazonaws.com:3306
+
+Host hallos-us-prd-web01.hallos
+	# User amix.eea
+	User ec2-user
+	HostName 10.99.38.10
+	ProxyCommand ssh -q hallos-us-fw01.hallos -W %h:%p
+
+Host hallos-us-hom-web01.hallos
+	# User amix.eea
+	User centos
+	HostName 10.99.44.10
+	ProxyCommand ssh -q hallos-us-fw01.hallos -W %h:%p
+
+Host hallos-us-dev-web01.hallos
+	# User amix.eea
+	User centos
+	HostName 10.99.50.10
+	ProxyCommand ssh -q hallos-us-fw01.hallos -W %h:%p
+
+# Assurant
+Host *-prd.assurant
+	IdentityFile ~/.ssh/id_rsa_amix_bastion1.pub
+	IdentitiesOnly yes
+
+Host front1-prd.assurant
+	User ubuntu
+	HostName 172.16.2.50
+
+Host front2-prd.assurant
+	User ubuntu
+	HostName 172.16.2.123
+
+Host back1-prd.assurant
+	User ubuntu
+	HostName 172.16.2.23
+
+Host back2-prd.assurant
+	User ubuntu
+	HostName 172.16.2.77
+
+Host ecs-prd.assurant
+	User ec2-user
+	HostName 172.16.2.12
+
+Host vpn-prd.assurant # fail
+	User ubuntu
+	HostName 172.16.2.133
+
+Host zscaler-prd.assurant
+	User admin
+	HostName 172.16.2.107
+
+Host front-hom.assurant
+	User ubuntu
+	HostName 10.0.129.94
+	IdentityFile ~/.ssh/tradeinvarejo-model
+	IdentitiesOnly yes
+
+Host ecs-hom.assurant
+	User ec2-user
+	HostName 10.0.140.16
+	IdentityFile ~/.ssh/id_rsa_amix_bastion1.pub
+	IdentitiesOnly yes
