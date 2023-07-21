@@ -1,3 +1,5 @@
+Include ~/.orbstack/ssh/config
+
 Compression yes
 ServerAliveInterval 60
 
@@ -414,19 +416,23 @@ Host bastion1.gol
 	IdentityFile ~/.ssh/id_rsa.pub
 	IdentitiesOnly yes
 
-Host bastion2.gol
-	HostName 10.4.175.15
-	User amix.eea
-	IdentityFile ~/.ssh/id_rsa.pub
-	IdentitiesOnly yes
-	ProxyJump bastion2.amix
+Host senhasegura.gol
+  HostName 10.80.140.105
+  User amix.eeabreu
 
-Host bastion3.gol
-	HostName 10.4.175.16
-	User amix.eea
-	IdentityFile ~/.ssh/id_rsa.pub
-	IdentitiesOnly yes
-	ProxyJump bastion3.amix
+#Host bastion2.gol
+#	HostName 10.4.175.15
+#	User amix.eea
+#	IdentityFile ~/.ssh/id_rsa.pub
+#	IdentitiesOnly yes
+#  ProxyJump bastion2.amix
+#
+#Host bastion3.gol
+#	HostName 10.4.175.16
+#	User amix.eea
+#	IdentityFile ~/.ssh/id_rsa.pub
+#	IdentitiesOnly yes
+#  ProxyJump bastion3.amix
 
 Host *.bastion?.gol
 	User amix.eea
@@ -666,6 +672,11 @@ Host prime-us-prd-app01.prime
 	HostName 10.98.38.14
 	ProxyCommand ssh -q bastion1.amix -W %h:%p
 
+Host prime-us-prd-wrk05.prime
+	User centos
+	HostName 10.98.38.34
+	ProxyCommand ssh -q bastion1.amix -W %h:%p
+
 # Jurd
 Host rn.iurd.amix
 	User root
@@ -694,6 +705,9 @@ Host *.bastion1.cba
 	IdentityFile ~/.ssh/id_rsa_cba_bastion1.pub
 	IdentitiesOnly yes
 	ProxyJump bastion1.cba
+
+Host metalex-hom.bastion1.cba
+  HostName 10.58.0.10
 
 Host sisf-hom.bastion1.cba
 	HostName 10.107.0.48
@@ -775,6 +789,9 @@ Host lb01.bastion1.amix
 
 Host h01.bastion1.amix
 	HostName 10.55.168.41
+
+Host kops.bastion1.amix
+	HostName 10.55.181.10
 
 # Gafisa
 Host personas.gafisa
@@ -908,10 +925,26 @@ Host hapvida.bastion1.amix zabbix.hapvida.bastion1.amix rootquery.hapvida.bastio
 Host bastion1.hapvida
 	User amix.eea
 	HostName 10.1.17.90
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host bastion2.hapvida
 	User amix.eea
+	HostName 10.1.17.91
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
+
+Host bastion3.hapvida # setup MFA
+	User amix.eea
+	HostName 10.1.17.92
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
+
+Host bastion4.hapvida
+	User amix.eea
 	HostName 10.200.8.10
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
 
 Host *.bastion1.hapvida
 	User amix.eea
@@ -986,7 +1019,13 @@ Host zscaler-prd.assurant
 	User admin
 	HostName 172.16.2.107
 
-Host front-hom.assurant
+Host zscaler-hom.assurant
+	User admin
+	HostName 10.0.143.107
+	IdentityFile ~/.ssh/id_rsa_amix_bastion1.pub
+	IdentitiesOnly yes
+
+Host front1-hom.assurant
 	User ubuntu
 	HostName 10.0.129.94
 	IdentityFile ~/.ssh/tradeinvarejo-model
@@ -997,3 +1036,22 @@ Host ecs-hom.assurant
 	HostName 10.0.140.16
 	IdentityFile ~/.ssh/id_rsa_amix_bastion1.pub
 	IdentitiesOnly yes
+
+Host front1-dev.assurant
+	User ubuntu
+	HostName 10.0.131.96
+	IdentityFile ~/.ssh/tradeinvarejo-model
+	IdentitiesOnly yes
+
+Host back1-dev.assurant
+	User ubuntu
+	HostName 10.0.131.64
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
+
+Host ecs-dev.assurant
+	User ec2-user
+	HostName 10.0.141.254
+	IdentityFile ~/.ssh/id_rsa.pub
+	IdentitiesOnly yes
+
